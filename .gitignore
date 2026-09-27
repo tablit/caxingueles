@@ -1,0 +1,8 @@
+# build do Hugo
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,28 @@
+# -- Menu principal --
+# Ordenado por weight, do menor para o maior.
+
+[[main]]
+  name = "Publicações"
+  pageRef = "publicacoes"
+  weight = 10
+
+[[main]]
+  name = "Categorias"
+  pageRef = "categorias"
+  weight = 20
+
+[[main]]
+  name = "Sobre"
+  pageRef = "/sobre"
+  weight = 30
+
+[[main]]
+  name = "Contato"
+  pageRef = "/contato"
+  weight = 40
+
+[[main]]
+  identifier = "appearance"
+  weight = 99
+  [main.params]
+    action = "appearance"
