@@ -46,3 +46,8 @@ fingerprintAlgorithm = "sha256"
 
 [taxonomy]
   showTermCount = true
+
+[contato]
+  # Id do formulario criado em tally.so (o trecho final da URL de embed).
+  # Vazio = a pagina de contato mostra um aviso no lugar do formulario.
+  tallyFormId = ""
