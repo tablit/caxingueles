@@ -37,7 +37,7 @@ fi
 js="$(cd "$T" && ls js/site.min.*.js 2>/dev/null | head -1)"
 if [ -n "$js" ]; then ok "JS gerado: $js"; else falha "JS js/site.min.*.js não foi gerado"; fi
 # Licença explícita no rodapé: nome completo com link oficial e legenda.
-tem "$T" index.html 'rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"'
+tem "$T" index.html 'rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br"'
 tem "$T" index.html 'Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional'
 tem "$T" index.html 'citando a autoria, sem fins comerciais e mantendo esta mesma licença'
 # Texto do rodapé.
