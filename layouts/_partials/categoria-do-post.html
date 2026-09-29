@@ -1,0 +1,5 @@
+{{- $categoria := false -}}
+{{- range first 1 (.GetTerms "categorias") -}}
+  {{- $categoria = . -}}
+{{- end -}}
+{{- return $categoria -}}

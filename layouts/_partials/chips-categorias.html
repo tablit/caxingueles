@@ -1,0 +1,9 @@
+{{- with site.Taxonomies.categorias }}
+<ul class="chips" aria-label="Categorias">
+  {{- range .Alphabetical }}
+  {{- with .Page }}
+  <li><a class="tag"{{ with .Params.ipe }} data-ipe="{{ . }}"{{ end }} href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+  {{- end }}
+  {{- end }}
+</ul>
+{{- end }}

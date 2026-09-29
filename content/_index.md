@@ -1,6 +1,7 @@
 ---
-title: "Caxingueles"
+title: "Caxinguelês"
 description: "Escritos da Turma 12 do mestrado da ESCAS"
+rotulo: "Turma 12 · ESCAS / IPÊ"
 ---
 
 Este é o espaço dos escritos da **Turma 12** do mestrado profissional da ESCAS — Escola Superior de Conservação Ambiental e Sustentabilidade, do Instituto de Pesquisas Ecológicas.
