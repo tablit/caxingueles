@@ -1,5 +1,5 @@
 ---
 title: "Turma"
-description: "Avisos, retrospectivas e o que é da turma."
+description: "Registros da Turma 12."
 ipe: "roxo"
 ---
