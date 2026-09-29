@@ -44,4 +44,5 @@ tem "$T" index.html 'citando a autoria, sem fins comerciais e mantendo esta mesm
 tem "$T" index.html '<p class="site-footer__texto">Registros e ensaios da Turma 12 do mestrado da ESCAS — Instituto de Pesquisas Ecológicas.</p>'
 # Apoio no rodapé.
 tem "$T" index.html '<h2 class="site-footer__titulo">Apoio</h2>'
-tem "$T" index.html '<li>ICAMA</li>'
+tem "$T" index.html '<li><img src="/img/apoio/icama.webp" alt="ICAMA" height="80"></li>'
+existe "$T" img/apoio/icama.webp

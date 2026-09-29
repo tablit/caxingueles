@@ -10,7 +10,7 @@
         {{- $apoio := . }}
         <li>
           {{- if .url }}<a href="{{ .url }}">{{ end -}}
-          {{- with .logo }}<img src="{{ . | relURL }}" alt="{{ $apoio.nome }}" height="48">{{ else }}{{ .nome }}{{ end -}}
+          {{- with .logo }}<img src="{{ . | relURL }}" alt="{{ $apoio.nome }}" height="80">{{ else }}{{ .nome }}{{ end -}}
           {{- if .url }}</a>{{ end -}}
         </li>
         {{- end }}
