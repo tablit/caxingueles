@@ -49,3 +49,5 @@ nao_tem "$T" index.html 'IPÊ — Instituto de Pesquisas Ecológicas'
 tem "$T" index.html '<h2 class="site-footer__titulo">Apoio</h2>'
 tem "$T" index.html '<li><a href="https://www.instagram.com/icama_org/"><img src="/img/apoio/icama.webp" alt="ICAMA" height="80"></a></li>'
 existe "$T" img/apoio/icama.webp
+# Extensões do site sobre o CSS do kit.
+if [ -n "$css" ]; then tem "$T" "$css" '.hero__ipes'; fi

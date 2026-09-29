@@ -1,5 +1,5 @@
 # Tarefa 2 — Início, cards e cores por categoria.
-tem "$T" index.html 'class="hero hero--destaque"'
+tem "$T" index.html 'class="hero hero--destaque hero--ipes"'
 tem "$T" index.html '<h1 class="hero__titulo" id="hero-titulo">Caxinguelês</h1>'
 tem "$T" index.html 'class="grade-posts"'
 tem "$T" index.html '<article class="card-post" data-ipe="roxo">'
@@ -25,3 +25,8 @@ tem "$T" index.html '<p>Este é o espaço dos registros e publicações da Turma
 tem "$T" index.html '<p class="hero__meta" style="margin-top: var(--esp-4)">* Iniciativa independente dos mestrandos, sem vínculo oficial com a ESCAS ou o IPÊ.</p>'
 nao_tem "$T" index.html 'Autointitulados'
 tem "$T" sobre/index.html 'id="o-nome"'
+# Topo da Início: três ipês no lugar das flores do kit.
+tem "$T" index.html 'class="hero hero--destaque hero--ipes"'
+tem "$T" index.html '<img class="hero__ipes" src="/grafismos/ipes-trio.svg" alt="" aria-hidden="true">'
+nao_tem "$T" index.html 'class="flor flor--a"'
+existe "$T" grafismos/ipes-trio.svg

@@ -1,12 +1,6 @@
 {{ define "main" }}
-<section class="hero hero--destaque" aria-labelledby="hero-titulo">
-  <div class="hero__flores" aria-hidden="true">
-    <img class="flor flor--a" src="{{ "grafismos/ipe-roxo.svg" | relURL }}" alt="">
-    <img class="flor flor--b" src="{{ "grafismos/ipe-amarelo.svg" | relURL }}" alt="">
-    <img class="flor flor--c" src="{{ "grafismos/ipe-rosa.svg" | relURL }}" alt="">
-    <img class="flor flor--d" src="{{ "grafismos/ipe-branco.svg" | relURL }}" alt="">
-    <img class="flor flor--e" src="{{ "grafismos/ipe-laranja.svg" | relURL }}" alt="">
-  </div>
+<section class="hero hero--destaque hero--ipes" aria-labelledby="hero-titulo">
+  <img class="hero__ipes" src="{{ "grafismos/ipes-trio.svg" | relURL }}" alt="" aria-hidden="true">
   <div class="container">
     <div class="hero__conteudo">
       <h1 class="hero__titulo" id="hero-titulo">{{ .Title }}</h1>

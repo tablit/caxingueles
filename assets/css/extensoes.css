@@ -1,0 +1,18 @@
+/* Extensões do site sobre o kit. Os arquivos do kit (tokens.css e caxingueles.css) ficam intactos;
+   o que é próprio do site entra aqui, só com as variáveis do kit. */
+
+/* Início: três ipês no canto inferior direito do hero, no lugar das flores.
+   Nunca ficam sobre o texto: no desktop ficam à direita dele; abaixo de 1024px, embaixo,
+   com espaço reservado no padding do hero. A base dos troncos some atrás da onda. */
+.hero__ipes {
+  position: absolute;
+  right: var(--esp-6);
+  bottom: 0;
+  width: min(40vw, 560px);
+  height: auto;
+  pointer-events: none;
+}
+@media (max-width: 1023px) {
+  .hero--ipes { padding-bottom: calc(var(--esp-16) + min(56vw, 320px) * 0.5625); }
+  .hero__ipes { right: var(--esp-4); width: min(56vw, 320px); }
+}
