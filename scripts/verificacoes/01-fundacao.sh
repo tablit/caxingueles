@@ -41,10 +41,10 @@ tem "$T" index.html 'rel="license" href="https://creativecommons.org/licenses/by
 tem "$T" index.html 'Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional'
 tem "$T" index.html 'citando a autoria, sem fins comerciais e mantendo esta mesma licença'
 # Texto do rodapé.
-tem "$T" index.html '<p class="site-footer__texto">Ensaios e registros dos Caxinguelês<br>Coletivo de mestrandos da Turma 12 da <a href="https://www.escas.org.br/cursos/mestrado/">ESCAS</a>/IPÊ</p>'
+tem "$T" index.html '<p class="site-footer__texto">Ensaios e registros dos Caxinguelês<br>Coletivo de mestrandos da Turma 12 da <a href="https://www.escas.org.br/cursos/mestrado/">ESCAS/IPÊ</a></p>'
 nao_tem "$T" publicacoes/index.html 'Escola Superior de Conservação Ambiental e Sustentabilidade'
 nao_tem "$T" index.html 'IPÊ — Instituto de Pesquisas Ecológicas'
 # Apoio no rodapé.
 tem "$T" index.html '<h2 class="site-footer__titulo">Apoio</h2>'
-tem "$T" index.html '<li><img src="/img/apoio/icama.webp" alt="ICAMA" height="80"></li>'
+tem "$T" index.html '<li><a href="https://www.instagram.com/icama_org/"><img src="/img/apoio/icama.webp" alt="ICAMA" height="80"></a></li>'
 existe "$T" img/apoio/icama.webp

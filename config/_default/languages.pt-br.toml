@@ -13,7 +13,7 @@ copyright = "Textos da Turma 12 — CC BY-NC-SA 4.0"
 [[params.rodape]]
   texto = "Ensaios e registros dos Caxinguelês"
 [[params.rodape]]
-  texto = "Coletivo de mestrandos da Turma 12 da [ESCAS](https://www.escas.org.br/cursos/mestrado/)/IPÊ"
+  texto = "Coletivo de mestrandos da Turma 12 da [ESCAS/IPÊ](https://www.escas.org.br/cursos/mestrado/)"
 
 # Apoiadores exibidos no rodapé. Opcionais em cada um:
 #   logo = "/img/apoio/arquivo.svg"  (versão clara, o fundo do rodapé é escuro)
@@ -21,6 +21,7 @@ copyright = "Textos da Turma 12 — CC BY-NC-SA 4.0"
 [[params.apoio]]
   nome = "ICAMA"
   logo = "/img/apoio/icama.webp"
+  url = "https://www.instagram.com/icama_org/"
 
 [params.licenca]
   nome = "Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional"

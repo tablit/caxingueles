@@ -9,9 +9,9 @@
   </div>
   <div class="container">
     <div class="hero__conteudo">
-      {{ with .Params.rotulo }}<p class="hero__rotulo">{{ . }}</p>{{ end }}
       <h1 class="hero__titulo" id="hero-titulo">{{ .Title }}</h1>
-      <div class="hero__resumo">{{ .Content }}</div>
+      {{- /* Links no hero herdam o branco do texto: o verde padrão dos links some sobre o fundo verde. */}}
+      <div class="hero__resumo">{{ replaceRE `<a href=` `<a style="color: inherit" href=` .Content | safeHTML }}</div>
       <a class="btn btn--destaque" href="{{ "publicacoes/" | relURL }}">Ler os textos <span aria-hidden="true">→</span></a>
     </div>
   </div>
