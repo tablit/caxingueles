@@ -13,7 +13,7 @@ copyright = "Textos da Turma 12 — CC BY-NC-SA 4.0"
 [[params.rodape]]
   texto = "Ensaios e registros dos Caxinguelês"
 [[params.rodape]]
-  texto = "Coletivo de mestrandos da Turma 12 da ESCAS/IPÊ"
+  texto = "Coletivo de mestrandos da Turma 12 da [ESCAS](https://www.escas.org.br/cursos/mestrado/)/IPÊ"
 
 # Apoiadores exibidos no rodapé. Opcionais em cada um:
 #   logo = "/img/apoio/arquivo.svg"  (versão clara, o fundo do rodapé é escuro)
