@@ -1,0 +1,6 @@
+{{- if gt .TotalPages 1 }}
+<nav class="mais" aria-label="Paginação" style="gap: var(--esp-4)">
+  {{- with .Prev }}<a class="btn btn--secundario" href="{{ .URL }}"><span aria-hidden="true">←</span> Mais recentes</a>{{ end }}
+  {{- with .Next }}<a class="btn btn--secundario" href="{{ .URL }}">Mais antigos <span aria-hidden="true">→</span></a>{{ end }}
+</nav>
+{{- end }}

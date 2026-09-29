@@ -1,0 +1,32 @@
+{{ define "main" }}
+{{- $ipe := .Params.ipe }}
+{{- $flor := "folha-1" }}
+{{- with $ipe }}{{ $flor = cond (eq . "broto") "folha-2" (printf "ipe-%s" .) }}{{ end }}
+<section class="hero hero--categoria"{{ with $ipe }} data-ipe="{{ . }}"{{ end }} aria-labelledby="categoria-titulo">
+  <div class="hero__flores" aria-hidden="true">
+    <img class="flor flor--a" src="{{ printf "grafismos/%s.svg" $flor | relURL }}" alt="">
+    <img class="flor flor--c" src="{{ "grafismos/folha-2.svg" | relURL }}" alt="">
+    <img class="flor flor--d" src="{{ "grafismos/ipe-branco.svg" | relURL }}" alt="">
+  </div>
+  <div class="container">
+    <div class="hero__conteudo">
+      <p class="hero__rotulo">Categoria</p>
+      <h1 class="hero__titulo" id="categoria-titulo">{{ .Title }}</h1>
+      {{ with .Description }}<p class="hero__resumo">{{ . }}</p>{{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="secao" aria-labelledby="textos-categoria">
+  <div class="container">
+    <div class="secao__cabecalho">
+      <h2 class="secao__titulo" id="textos-categoria">Textos em {{ .Title }}</h2>
+      <p class="post-meta">{{ len .Pages }} {{ cond (eq (len .Pages) 1) "texto" "textos" }}</p>
+    </div>
+    {{- $paginador := .Paginate .Pages }}
+    {{ partial "grade-posts.html" $paginador.Pages }}
+    {{ partial "paginacao.html" $paginador }}
+    <div class="mais"><a class="btn btn--secundario" href="{{ "categorias/" | relURL }}">Ver todas as categorias</a></div>
+  </div>
+</section>
+{{ end }}

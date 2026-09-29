@@ -1,0 +1,14 @@
+{{ define "main" }}
+<section class="secao">
+  <div class="container">
+    <div class="secao__cabecalho">
+      <h1 class="secao__titulo">{{ .Title }}</h1>
+    </div>
+    {{ with .Content }}<div class="prosa" style="max-width: var(--largura-texto)">{{ . }}</div>{{ end }}
+    {{ partial "chips-categorias.html" . }}
+    {{- $paginador := .Paginate .Pages }}
+    {{ partial "grade-posts.html" $paginador.Pages }}
+    {{ partial "paginacao.html" $paginador }}
+  </div>
+</section>
+{{ end }}
