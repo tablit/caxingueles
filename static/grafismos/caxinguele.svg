@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30 -66 76 68">
+  <!-- Caxinguelê sentado, de perfil para a direita: silhueta na cor tronco, olho vazado no verde do hero. -->
+  <g fill="#1F3A2B">
+    <path d="M-8-18C-22-16-30-28-28-40C-26-53-15-63-2-63C7-63 12-58 12-53C8-55 3-55-1-52C-7-47-8-39-4-31Z"/>
+    <path d="M30 0C26-2 24-8 24-14C24-20 26-24 30-27C34-30 40-32 44-34C42-38 38-42 32-44C30-46 26-46 23-46C23-50 21-54 18-53C16-52 16-48 17-45C12-44 6-40 0-36C-8-30-12-20-12-12C-12-4-6 0 2 0Z"/>
+    <circle cx="32" cy="-38" r="1.8" fill="#00833F"/>
+  </g>
+</svg>

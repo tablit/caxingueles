@@ -30,3 +30,6 @@ tem "$T" index.html 'class="hero hero--destaque hero--ipes"'
 tem "$T" index.html '<img class="hero__ipes" src="/grafismos/ipes-trio.svg" alt="" aria-hidden="true">'
 nao_tem "$T" index.html 'class="flor flor--a"'
 existe "$T" grafismos/ipes-trio.svg
+# Caxinguelê sentado na onda, entre os ipês.
+tem "$T" index.html '<img class="hero__caxinguele" src="/grafismos/caxinguele.svg" alt="" aria-hidden="true">'
+existe "$T" grafismos/caxinguele.svg

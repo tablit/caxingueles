@@ -49,10 +49,4 @@
   <use xlink:href="#ipe" href="#ipe" transform="translate(150 360) scale(.72)" color="#E8609A"/>
   <use xlink:href="#ipe" href="#ipe" transform="translate(502 360) scale(.8)" color="#8A4FB8"/>
   <use xlink:href="#ipe" href="#ipe" transform="translate(328 360)" color="#FFC83D"/>
-  <!-- Caxinguelê sentado entre os ipês: silhueta na cor tronco, olho vazado no verde do hero. -->
-  <g transform="translate(214 360) scale(.9)" fill="#1F3A2B">
-    <path d="M-8-18C-22-16-30-30-28-46C-26-62-14-74 0-74C10-74 16-68 16-62C12-64 6-64 2-60C-6-54-8-44-4-34Z"/>
-    <path d="M30 0C26-2 24-8 24-14C24-20 26-24 30-27C34-30 40-32 44-34C42-38 38-42 32-44C30-46 26-46 23-46C23-50 21-54 18-53C16-52 16-48 17-45C12-44 6-40 0-36C-8-30-12-20-12-12C-12-4-6 0 2 0Z"/>
-    <circle cx="32" cy="-38" r="1.8" fill="#00833F"/>
-  </g>
 </svg>

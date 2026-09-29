@@ -4,15 +4,38 @@
 /* Início: três ipês no canto inferior direito do hero, no lugar das flores.
    Nunca ficam sobre o texto: no desktop ficam à direita dele; abaixo de 1024px, embaixo,
    com espaço reservado no padding do hero. A base dos troncos some atrás da onda. */
+.hero--ipes {
+  --ipes-largura: min(40vw, 560px);
+  --ipes-margem: var(--esp-6);
+  --caxinguele-altura: 45px;
+}
 .hero__ipes {
   position: absolute;
-  right: var(--esp-6);
+  right: var(--ipes-margem);
   bottom: 0;
-  width: min(40vw, 560px);
+  width: var(--ipes-largura);
   height: auto;
   pointer-events: none;
 }
 @media (max-width: 1023px) {
-  .hero--ipes { padding-bottom: calc(var(--esp-16) + min(56vw, 320px) * 0.5625); }
-  .hero__ipes { right: var(--esp-4); width: min(56vw, 320px); }
+  .hero--ipes {
+    --ipes-largura: min(56vw, 320px);
+    --ipes-margem: var(--esp-4);
+    --caxinguele-altura: 28px;
+    padding-bottom: calc(var(--esp-16) + var(--ipes-largura) * 0.5625);
+  }
+}
+
+/* Caxinguelê sentado sobre a onda, entre o ipê rosa e o amarelo. Fica fora do SVG dos ipês para ter
+   altura fixa: a onda do hero tem 48px em qualquer largura e esconderia um bicho que encolhe com as árvores.
+   0.6375 = distância do ponto entre os troncos à borda direita do desenho; 0.54 = centro das patas
+   até a borda direita do caxinguelê, em alturas. z-index o põe na frente da onda. */
+.hero__caxinguele {
+  position: absolute;
+  right: calc(var(--ipes-margem) + var(--ipes-largura) * 0.6375 - var(--caxinguele-altura) * 0.54);
+  bottom: 20px;
+  z-index: 1;
+  height: var(--caxinguele-altura);
+  width: auto;
+  pointer-events: none;
 }
