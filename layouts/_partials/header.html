@@ -1,0 +1,16 @@
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="logo" href="{{ "/" | relURL }}"><img src="{{ "marca/logo-horizontal-verde.svg" | relURL }}" alt="Caxinguelês, página inicial" height="44"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+      <span class="nav-toggle__barras" aria-hidden="true"></span><span class="sr-only">Abrir menu</span>
+    </button>
+    <nav class="nav" id="menu" aria-label="Principal">
+      <ul class="nav__lista">
+        {{- $atual := . }}
+        {{- range site.Menus.main }}
+        <li><a class="nav__link" href="{{ .URL }}"{{ if or ($atual.IsMenuCurrent "main" .) ($atual.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+  </div>
+</header>

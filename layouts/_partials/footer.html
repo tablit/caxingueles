@@ -1,0 +1,24 @@
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <a class="site-footer__logo" href="{{ "/" | relURL }}"><img src="{{ "marca/logo-horizontal-branco.svg" | relURL }}" alt="Caxinguelês" height="48"></a>
+      <p class="site-footer__texto">{{ site.Params.description }}.</p>
+    </div>
+    <nav aria-label="Rodapé">
+      <h2 class="site-footer__titulo">Navegue</h2>
+      <ul class="site-footer__lista">
+        <li><a href="{{ "/" | relURL }}">Início</a></li>
+        {{- range site.Menus.main }}
+        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+    <div>
+      <h2 class="site-footer__titulo">Fale com a turma</h2>
+      <p class="site-footer__texto">Dúvidas, sugestões, convites: <a href="{{ "contato/" | relURL }}">escreva pra gente</a>.</p>
+    </div>
+  </div>
+  <div class="container site-footer__base">
+    <p>© {{ now.Year }} {{ site.Title }} · {{ site.Copyright }}</p>
+  </div>
+</footer>

@@ -3,14 +3,8 @@ label = "Português"
 direction = "ltr"
 weight = 1
 
-title = "Caxingueles"
+title = "Caxinguelês"
 copyright = "Textos da Turma 12 — CC BY-NC-SA 4.0"
 
 [params]
-  dateFormat = "2 de January de 2006"
-  mainSections = ["publicacoes"]
   description = "Escritos da Turma 12 do mestrado da ESCAS — Instituto de Pesquisas Ecológicas"
-
-[params.author]
-  name = "Turma 12 — ESCAS"
-  headline = "Mestrado profissional em Conservação da Biodiversidade e Desenvolvimento Sustentável"

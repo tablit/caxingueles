@@ -1,0 +1,11 @@
+{{ define "main" }}
+<div class="container">
+  <header class="post-cabecalho">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="post-meta">{{ . }}</p>{{ end }}
+  </header>
+  <div class="prosa" style="max-width: var(--largura-texto); margin-inline: auto">
+    {{ .Content }}
+  </div>
+</div>
+{{ end }}
