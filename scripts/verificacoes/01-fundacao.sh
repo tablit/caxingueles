@@ -40,3 +40,5 @@ if [ -n "$js" ]; then ok "JS gerado: $js"; else falha "JS js/site.min.*.js não 
 tem "$T" index.html 'rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"'
 tem "$T" index.html 'Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional'
 tem "$T" index.html 'citando a autoria, sem fins comerciais e mantendo esta mesma licença'
+# Texto do rodapé.
+tem "$T" index.html '<p class="site-footer__texto">Registros e ensaios da Turma 12 do mestrado da ESCAS — Instituto de Pesquisas Ecológicas.</p>'
