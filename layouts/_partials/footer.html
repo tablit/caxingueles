@@ -3,6 +3,19 @@
     <div>
       <a class="site-footer__logo" href="{{ "/" | relURL }}"><img src="{{ "marca/logo-horizontal-branco.svg" | relURL }}" alt="Caxinguelês" height="48"></a>
       <p class="site-footer__texto">{{ site.Params.rodape }}</p>
+      {{- with site.Params.apoio }}
+      <h2 class="site-footer__titulo">Apoio</h2>
+      <ul class="site-footer__lista">
+        {{- range . }}
+        {{- $apoio := . }}
+        <li>
+          {{- if .url }}<a href="{{ .url }}">{{ end -}}
+          {{- with .logo }}<img src="{{ . | relURL }}" alt="{{ $apoio.nome }}" height="48">{{ else }}{{ .nome }}{{ end -}}
+          {{- if .url }}</a>{{ end -}}
+        </li>
+        {{- end }}
+      </ul>
+      {{- end }}
     </div>
     <nav aria-label="Rodapé">
       <h2 class="site-footer__titulo">Navegue</h2>

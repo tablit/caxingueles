@@ -42,3 +42,6 @@ tem "$T" index.html 'Creative Commons Atribuição-NãoComercial-CompartilhaIgua
 tem "$T" index.html 'citando a autoria, sem fins comerciais e mantendo esta mesma licença'
 # Texto do rodapé.
 tem "$T" index.html '<p class="site-footer__texto">Registros e ensaios da Turma 12 do mestrado da ESCAS — Instituto de Pesquisas Ecológicas.</p>'
+# Apoio no rodapé.
+tem "$T" index.html '<h2 class="site-footer__titulo">Apoio</h2>'
+tem "$T" index.html '<li>ICAMA</li>'

@@ -10,6 +10,12 @@ copyright = "Textos da Turma 12 — CC BY-NC-SA 4.0"
   description = "Escritos da Turma 12 do mestrado da ESCAS — Instituto de Pesquisas Ecológicas"
   rodape = "Registros e ensaios da Turma 12 do mestrado da ESCAS — Instituto de Pesquisas Ecológicas."
 
+# Apoiadores exibidos no rodapé. Opcionais em cada um:
+#   logo = "/img/apoio/arquivo.svg"  (versão clara, o fundo do rodapé é escuro)
+#   url = "https://..."
+[[params.apoio]]
+  nome = "ICAMA"
+
 [params.licenca]
   nome = "Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional"
   sigla = "CC BY-NC-SA 4.0"
