@@ -13,6 +13,9 @@
       {{- /* Links no hero herdam o branco do texto: o verde padrão dos links some sobre o fundo verde. */}}
       <div class="hero__resumo">{{ replaceRE `<a href=` `<a style="color: inherit" href=` .Content | safeHTML }}</div>
       <a class="btn btn--destaque" href="{{ "publicacoes/" | relURL }}">Ler os textos <span aria-hidden="true">→</span></a>
+      {{- with site.Params.aviso }}
+      <p class="hero__meta" style="margin-top: var(--esp-4)">* {{ . }}</p>
+      {{- end }}
     </div>
   </div>
 </section>

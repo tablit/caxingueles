@@ -21,5 +21,7 @@ nao_tem "$P" index.html 'grade-posts'
 nao_tem "$P" index.html 'Fixture'
 # Início: só o título, sem rótulo acima, e o texto de apresentação com link para "O nome" no Sobre.
 nao_tem "$T" index.html 'class="hero__rotulo"'
-tem "$T" index.html 'Autointitulados Caxinguelês (<a style="color: inherit" href="/sobre/#o-nome">saiba o porquê aqui</a>), os mestrandos da Turma 12 criaram este espaço para seus registros e publicações.'
+tem "$T" index.html '<p>Este é o espaço dos registros e publicações da Turma 12* do mestrado profissional da ESCAS — Escola Superior de Conservação Ambiental e Sustentabilidade, do Instituto de Pesquisas Ecológicas.</p>'
+tem "$T" index.html '<p class="hero__meta" style="margin-top: var(--esp-4)">* Iniciativa independente dos mestrandos, sem vínculo oficial com a ESCAS ou o IPÊ.</p>'
+nao_tem "$T" index.html 'Autointitulados'
 tem "$T" sobre/index.html 'id="o-nome"'
