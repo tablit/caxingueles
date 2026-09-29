@@ -1,0 +1,30 @@
+{{ define "main" }}
+<section class="secao">
+  <div class="container">
+    <div class="secao__cabecalho">
+      <h1 class="secao__titulo">{{ .Title }}</h1>
+    </div>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    {{- with .Data.Terms.Alphabetical }}
+    <ul class="grade-posts">
+      {{- range . }}
+      {{- $total := .Count }}
+      {{- with .Page }}
+      <li>
+        <article class="card-post"{{ with .Params.ipe }} data-ipe="{{ . }}"{{ end }}>
+          <div class="card-post__corpo">
+            <h2 class="card-post__titulo"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+            {{ with .Description }}<p class="card-post__resumo">{{ . }}</p>{{ end }}
+            <p class="card-post__meta">{{ $total }} {{ cond (eq $total 1) "texto" "textos" }}</p>
+          </div>
+        </article>
+      </li>
+      {{- end }}
+      {{- end }}
+    </ul>
+    {{- else }}
+    {{ partial "grade-posts.html" slice }}
+    {{- end }}
+  </div>
+</section>
+{{ end }}

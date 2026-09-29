@@ -16,4 +16,4 @@ showReadingTime: false
 
 ## O nome
 
-<!-- TODO: de onde vem "Caxingueles". -->
+<!-- TODO: de onde vem "Caxinguelês". -->

@@ -1,0 +1,65 @@
+/* GERADO por tools/gerar-tokens.mjs a partir de tokens.json. Não edite à mão. */
+:root {
+  /* cor */
+  --cor-verde: #00833F;
+  --cor-verde-escuro: #006430;
+  --cor-broto: #8BD17C;
+  --cor-pelo: #9A6139;
+  --cor-creme: #FFF8EA;
+  --cor-branco: #FFFFFF;
+  --cor-tronco: #1F3A2B;
+  /* ipe */
+  --ipe-amarelo: #FFC83D;
+  --ipe-amarelo-claro: #FFF0C2;
+  --ipe-amarelo-texto: #7A5900;
+  --ipe-rosa: #E8609A;
+  --ipe-rosa-claro: #FCDDEA;
+  --ipe-rosa-texto: #A8306A;
+  --ipe-roxo: #8A4FB8;
+  --ipe-roxo-claro: #EBDDF6;
+  --ipe-roxo-texto: #6A3494;
+  --ipe-laranja: #F28C3A;
+  --ipe-laranja-claro: #FDE3CF;
+  --ipe-laranja-texto: #A04F12;
+  --ipe-broto: #8BD17C;
+  --ipe-broto-claro: #DDF2D6;
+  --ipe-broto-texto: #2F6B22;
+  --ipe-branco: #FFFFFF;
+  /* fonte */
+  --fonte-titulo: 'Baloo 2', 'Nunito', system-ui, sans-serif;
+  --fonte-texto: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* fs */
+  --fs-14: 0.875rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-22: 1.375rem;
+  --fs-28: 1.75rem;
+  --fs-36: 2.25rem;
+  --fs-48: 3rem;
+  --fs-64: 4rem;
+  /* esp */
+  --esp-1: 0.25rem;
+  --esp-2: 0.5rem;
+  --esp-3: 0.75rem;
+  --esp-4: 1rem;
+  --esp-6: 1.5rem;
+  --esp-8: 2rem;
+  --esp-12: 3rem;
+  --esp-16: 4rem;
+  /* raio */
+  --raio-p: 12px;
+  --raio-m: 22px;
+  --raio-pilula: 999px;
+  /* sombra */
+  --sombra-1: 0 2px 8px rgba(0, 100, 48, 0.08);
+  --sombra-2: 0 8px 24px rgba(0, 100, 48, 0.12);
+  /* largura */
+  --largura-conteudo: 1200px;
+  --largura-texto: 68ch;
+  /* borda */
+  --borda-categoria: 6px;
+  --borda-foco: 3px;
+  /* breakpoint */
+  --breakpoint-tablet: 640px;
+  --breakpoint-desktop: 1024px;
+}

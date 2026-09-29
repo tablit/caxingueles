@@ -1,9 +1,7 @@
 # -- Configuracao do site --
-# https://jpanther.github.io/congo/docs/configuration/
 
 baseURL = "https://caxingueles.eco.br/"
 defaultContentLanguage = "pt-br"
-theme = "congo"
 
 enableRobotsTXT = true
 summaryLength = 0
@@ -13,10 +11,9 @@ summaryLength = 0
 
 [taxonomies]
   categoria = "categorias"
-  tag = "tags"
 
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS"]
 
 [privacy]
   [privacy.youTube]

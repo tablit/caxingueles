@@ -1,0 +1,8 @@
+# Soma os posts-fixture ao conteúdo real, só no ambiente de teste.
+[[mounts]]
+  source = "content"
+  target = "content"
+
+[[mounts]]
+  source = "tests/fixtures/content"
+  target = "content"

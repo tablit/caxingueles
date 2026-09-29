@@ -30,7 +30,6 @@ title: "O título do seu texto"
 date: 2026-10-02
 author: "Seu Nome"
 categorias: ["ensaios"]
-tags: []
 summary: "Uma ou duas frases. É o que aparece na home e na lista."
 draft: true
 ---
@@ -46,6 +45,27 @@ As categorias são quatro, escolha uma:
 | `campo` | Relato de saída, visita, disciplina prática |
 | `resenhas` | Leitura comentada |
 | `turma` | Avisos, retrospectivas, o que é da turma |
+
+### Recursos opcionais do texto
+
+- **Imagem de capa:** suba a imagem em `static/img/publicacoes/` (veja "Imagens", mais abaixo) e acrescente ao bloco do começo:
+  ```yaml
+  capa: "/img/publicacoes/nome-da-imagem.jpg"
+  capa_alt: "Descrição da imagem para quem não enxerga"
+  capa_legenda: "Legenda. Foto: Nome do autor."
+  ```
+- **Referências:** uma lista no bloco do começo, cada item em uma linha:
+  ```yaml
+  referencias:
+    - "Sobrenome, A. (2020). Título do artigo. *Periódico*, 1, 1–10."
+  ```
+- **Caixa "Você sabia?":**
+  ```
+  {{< destaque titulo="Você sabia?" >}}
+  Uma curiosidade curta.
+  {{< /destaque >}}
+  ```
+- **Sumário no topo:** `showTableOfContents: true` no bloco do começo, para textos longos com vários subtítulos.
 
 ## 3. Abra o pull request
 
@@ -69,10 +89,16 @@ Quando o texto estiver aprovado:
 
 ## Imagens
 
-Coloque o arquivo em `assets/img/` e chame no texto assim:
+Suba o arquivo em `static/img/publicacoes/` (no GitHub: abra a pasta e use **Add file** › **Upload files**) e chame no texto assim:
 
 ```
-![descrição da imagem para quem não enxerga](img/nome-do-arquivo.jpg)
+![descrição da imagem para quem não enxerga](/img/publicacoes/nome-do-arquivo.jpg)
+```
+
+Uma imagem sozinha num parágrafo vira figura. Para ter legenda, escreva o texto entre aspas depois do endereço:
+
+```
+![Gráfico de barras com as floradas por mês](/img/publicacoes/grafico.png "Figura 1. Floradas ao longo do ano.")
 ```
 
 Comprima a imagem antes de subir — acima de 300 KB, a página fica lenta no celular.

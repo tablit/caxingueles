@@ -1,0 +1,7 @@
+{{- $titulo := .Get "titulo" | default "Você sabia?" -}}
+{{- $id := printf "destaque-%d" .Ordinal -}}
+<aside class="destaque" aria-labelledby="{{ $id }}">
+  <img class="destaque__flor" src="{{ "grafismos/ipe-amarelo.svg" | relURL }}" alt="" aria-hidden="true">
+  <h3 class="destaque__titulo" id="{{ $id }}">{{ $titulo }}</h3>
+  {{ .Inner | .Page.RenderString (dict "display" "block") }}
+</aside>

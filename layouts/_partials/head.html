@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{- $titulo := cond (eq .Kind "404") "Página não encontrada" .Title }}
+<title>{{ if .IsHome }}{{ site.Title }} · {{ site.Params.description }}{{ else }}{{ $titulo }} · {{ site.Title }}{{ end }}</title>
+{{- $descricao := site.Params.description -}}
+{{- with .Description }}{{ $descricao = . }}{{ else }}{{ with .Summary }}{{ $descricao = . | plainify | truncate 160 }}{{ end }}{{ end }}
+<meta name="description" content="{{ $descricao }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" href="{{ "marca/favicon.svg" | relURL }}" type="image/svg+xml">
+<link rel="icon" href="{{ "marca/favicon-32.png" | relURL }}" sizes="32x32">
+<link rel="apple-touch-icon" href="{{ "marca/apple-touch-icon-180.png" | relURL }}">
+<meta name="theme-color" content="#00833F">
+{{- $og := "marca/og-image-padrao.png" | absURL -}}
+{{- with .Params.capa }}{{ $og = . | absURL }}{{ end }}
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ $titulo }}">
+<meta property="og:description" content="{{ $descricao }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="{{ $og }}">
+{{- with .OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }}">
+{{- end }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:ital,wght@0,400;0,700;1,400&display=swap">
+{{- $css := slice (resources.Get "css/tokens.css") (resources.Get "css/caxingueles.css") | resources.Concat "css/site.css" | minify | fingerprint "sha256" }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+<script>document.documentElement.classList.add('js')</script>
+{{- $js := resources.Get "js/site.js" | minify | fingerprint "sha256" }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>

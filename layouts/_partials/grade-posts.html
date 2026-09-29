@@ -1,0 +1,13 @@
+{{- if . }}
+<ul class="grade-posts">
+  {{- range . }}
+  <li>{{ partial "card-post.html" . }}</li>
+  {{- end }}
+</ul>
+{{- else }}
+<div class="estado-vazio">
+  <img src="{{ "grafismos/ipe-amarelo.svg" | relURL }}" alt="" aria-hidden="true">
+  <p class="estado-vazio__titulo"><strong>Nenhum texto por aqui ainda…</strong></p>
+  <p>A semente foi plantada! Volte em breve.</p>
+</div>
+{{- end }}

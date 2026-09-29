@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section class="secao">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="prosa">{{ . }}</div>{{ end }}
+    <ul>
+      {{- range .Pages }}
+      <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+  </div>
+</section>
+{{ end }}

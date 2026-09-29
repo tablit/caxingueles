@@ -1,0 +1,33 @@
+{{ define "main" }}
+<section class="hero hero--destaque" aria-labelledby="hero-titulo">
+  <div class="hero__flores" aria-hidden="true">
+    <img class="flor flor--a" src="{{ "grafismos/ipe-roxo.svg" | relURL }}" alt="">
+    <img class="flor flor--b" src="{{ "grafismos/ipe-amarelo.svg" | relURL }}" alt="">
+    <img class="flor flor--c" src="{{ "grafismos/ipe-rosa.svg" | relURL }}" alt="">
+    <img class="flor flor--d" src="{{ "grafismos/ipe-branco.svg" | relURL }}" alt="">
+    <img class="flor flor--e" src="{{ "grafismos/ipe-laranja.svg" | relURL }}" alt="">
+  </div>
+  <div class="container">
+    <div class="hero__conteudo">
+      {{ with .Params.rotulo }}<p class="hero__rotulo">{{ . }}</p>{{ end }}
+      <h1 class="hero__titulo" id="hero-titulo">{{ .Title }}</h1>
+      <div class="hero__resumo">{{ .Content }}</div>
+      <a class="btn btn--destaque" href="{{ "publicacoes/" | relURL }}">Ler os textos <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+{{- $textos := where site.RegularPages "Section" "publicacoes" }}
+<section class="secao" aria-labelledby="recentes-titulo">
+  <div class="container">
+    <div class="secao__cabecalho">
+      <h2 class="secao__titulo" id="recentes-titulo">Textos recentes</h2>
+    </div>
+    {{ partial "chips-categorias.html" . }}
+    {{ partial "grade-posts.html" (first 6 $textos) }}
+    {{- if gt (len $textos) 6 }}
+    <div class="mais"><a class="btn btn--secundario" href="{{ "publicacoes/" | relURL }}">Todos os textos</a></div>
+    {{- end }}
+  </div>
+</section>
+{{ end }}
