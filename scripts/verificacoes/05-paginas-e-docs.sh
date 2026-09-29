@@ -15,3 +15,5 @@ tem . CONTRIBUTING.md 'destaque'
 tem . CONTRIBUTING.md 'referencias'
 tem . archetypes/publicacoes.md 'capa'
 existe . docs/adr/0001-templates-proprios-com-kit-de-identidade.md
+tem "$T" 404.html '<title>Página não encontrada · Caxinguelês</title>'
+tem "$T" 404.html 'property="og:title" content="Página não encontrada"'

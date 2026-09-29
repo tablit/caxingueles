@@ -3,7 +3,6 @@ title: "{{ replace .File.ContentBaseName `-` ` ` | title }}"
 date: {{ .Date }}
 author: ""
 categorias: []
-tags: []
 summary: ""
 draft: true
 # Opcionais — apague as linhas que não usar:

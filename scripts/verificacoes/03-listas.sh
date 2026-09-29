@@ -18,3 +18,6 @@ nao_tem "$T" categorias/avulsa/index.html 'data-ipe=""'
 tem "$P" publicacoes/index.html 'class="estado-vazio"'
 nao_tem "$P" publicacoes/index.html 'aria-label="Paginação"'
 tem "$P" categorias/index.html 'class="estado-vazio"'
+# Tags não são exibidas: nenhuma página de tag é gerada (nem com rascunhos que usam tags).
+nao_existe "$P" tags/index.html
+nao_existe "$T" tags/exemplo/index.html

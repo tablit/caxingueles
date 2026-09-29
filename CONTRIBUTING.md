@@ -30,7 +30,6 @@ title: "O título do seu texto"
 date: 2026-10-02
 author: "Seu Nome"
 categorias: ["ensaios"]
-tags: []
 summary: "Uma ou duas frases. É o que aparece na home e na lista."
 draft: true
 ---

@@ -1,6 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ if .IsHome }}{{ site.Title }} · {{ site.Params.description }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+{{- $titulo := cond (eq .Kind "404") "Página não encontrada" .Title }}
+<title>{{ if .IsHome }}{{ site.Title }} · {{ site.Params.description }}{{ else }}{{ $titulo }} · {{ site.Title }}{{ end }}</title>
 {{- $descricao := site.Params.description -}}
 {{- with .Description }}{{ $descricao = . }}{{ else }}{{ with .Summary }}{{ $descricao = . | plainify | truncate 160 }}{{ end }}{{ end }}
 <meta name="description" content="{{ $descricao }}">
@@ -14,7 +15,7 @@
 <meta property="og:site_name" content="{{ site.Title }}">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
-<meta property="og:title" content="{{ .Title }}">
+<meta property="og:title" content="{{ $titulo }}">
 <meta property="og:description" content="{{ $descricao }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:image" content="{{ $og }}">

@@ -11,7 +11,6 @@ summaryLength = 0
 
 [taxonomies]
   categoria = "categorias"
-  tag = "tags"
 
 [outputs]
   home = ["HTML", "RSS"]
