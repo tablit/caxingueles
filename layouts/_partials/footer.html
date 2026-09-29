@@ -19,6 +19,9 @@
     </div>
   </div>
   <div class="container site-footer__base">
-    <p>© {{ now.Year }} {{ site.Title }} · {{ site.Copyright }}</p>
+    {{- with site.Params.licenca }}
+    <p>© {{ now.Year }} {{ site.Title }} · Textos da Turma 12 sob a licença <a rel="license" href="{{ .url }}">{{ .nome }} ({{ .sigla }})</a>.</p>
+    <p style="margin-top: var(--esp-1)">{{ .resumo }}</p>
+    {{- end }}
   </div>
 </footer>

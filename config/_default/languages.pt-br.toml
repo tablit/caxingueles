@@ -8,3 +8,9 @@ copyright = "Textos da Turma 12 — CC BY-NC-SA 4.0"
 
 [params]
   description = "Escritos da Turma 12 do mestrado da ESCAS — Instituto de Pesquisas Ecológicas"
+
+[params.licenca]
+  nome = "Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional"
+  sigla = "CC BY-NC-SA 4.0"
+  url = "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+  resumo = "Você pode copiar, distribuir e adaptar os textos, citando a autoria, sem fins comerciais e mantendo esta mesma licença."
