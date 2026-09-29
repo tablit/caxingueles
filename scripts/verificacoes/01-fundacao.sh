@@ -41,7 +41,7 @@ tem "$T" index.html 'rel="license" href="https://creativecommons.org/licenses/by
 tem "$T" index.html 'Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional'
 tem "$T" index.html 'citando a autoria, sem fins comerciais e mantendo esta mesma licença'
 # Texto do rodapé.
-tem "$T" index.html '<p class="site-footer__texto">Registros e ensaios da Turma 12 do mestrado da ESCAS — Instituto de Pesquisas Ecológicas.</p>'
+tem "$T" index.html '<p class="site-footer__texto">Ensaios e registros dos Caxinguelês<br>Coletivo de mestrandos da Turma 12 da ESCAS (Escola Superior de Conservação e Sustentabilidade)<br>IPÊ — Instituto de Pesquisas Ecológicas</p>'
 # Apoio no rodapé.
 tem "$T" index.html '<h2 class="site-footer__titulo">Apoio</h2>'
 tem "$T" index.html '<li><img src="/img/apoio/icama.webp" alt="ICAMA" height="80"></li>'
