@@ -1,0 +1,55 @@
+{{ define "main" }}
+{{- $categoria := partial "categoria-do-post.html" . }}
+<article{{ with $categoria }}{{ with .Params.ipe }} data-ipe="{{ . }}"{{ end }}{{ end }}>
+  <div class="container">
+    <header class="post-cabecalho">
+      {{- with $categoria }}
+      <a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{- end }}
+      <h1>{{ .Title }}</h1>
+      <p class="post-meta">{{ with .Params.author }}por {{ . }} · {{ end }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time> · {{ .ReadingTime }} min de leitura</p>
+    </header>
+
+    {{- with .Params.capa }}
+    <figure class="post-capa">
+      <img src="{{ . | relURL }}" alt="{{ $.Params.capa_alt }}">
+      {{- with $.Params.capa_legenda }}
+      <figcaption>{{ . }}</figcaption>
+      {{- end }}
+    </figure>
+    {{- end }}
+
+    <div class="post-layout">
+      {{- if and .Params.showTableOfContents .Fragments.HeadingsMap }}
+      <details class="post-sumario" open>
+        <summary>Neste texto</summary>
+        {{ .TableOfContents }}
+      </details>
+      {{- else }}
+      <div></div>
+      {{- end }}
+
+      <div class="prosa">
+        {{ .Content }}
+
+        {{- with .Params.referencias }}
+        <section class="referencias" aria-labelledby="referencias">
+          <h2 id="referencias">Referências</h2>
+          <ol>
+            {{- range . }}
+            <li>{{ . | markdownify }}</li>
+            {{- end }}
+          </ol>
+        </section>
+        {{- end }}
+      </div>
+
+      <aside class="post-compartilhar" aria-label="Compartilhar">
+        <p class="post-compartilhar__titulo">Compartilhar</p>
+        <button class="btn btn--secundario btn--p" type="button" data-copiar>Copiar link</button>
+        <a class="btn btn--secundario btn--p" href="https://wa.me/?text={{ printf "%s %s" .Title .Permalink | urlquery }}">WhatsApp</a>
+      </aside>
+    </div>
+  </div>
+</article>
+{{ end }}

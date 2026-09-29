@@ -1,7 +1,9 @@
 # -- Markup --
-# These settings are required for the theme to function.
 
 [goldmark]
+[goldmark.parser]
+  # Imagem sozinha num parágrafo vira bloco (render-image.html usa .IsBlock para gerar a figura).
+  wrapStandAloneImageWithinParagraph = false
 [goldmark.renderer]
   unsafe = true
 [goldmark.extensions]
@@ -16,4 +18,5 @@
 
 [tableOfContents]
   startLevel = 2
-  endLevel = 4
+  endLevel = 3
+  ordered = true
