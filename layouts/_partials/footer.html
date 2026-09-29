@@ -2,7 +2,7 @@
   <div class="container site-footer__inner">
     <div>
       <a class="site-footer__logo" href="{{ "/" | relURL }}"><img src="{{ "marca/logo-horizontal-branco.svg" | relURL }}" alt="Caxinguelês" height="48"></a>
-      <p class="site-footer__texto">{{ range $i, $linha := site.Params.rodape }}{{ if $i }}<br>{{ end }}{{ with $linha.url }}<a href="{{ . }}">{{ $linha.texto }}</a>{{ else }}{{ $linha.texto }}{{ end }}{{ end }}</p>
+      <p class="site-footer__texto">{{ range $i, $linha := site.Params.rodape }}{{ if $i }}<br>{{ end }}{{ $linha.texto | markdownify }}{{ end }}</p>
       {{- with site.Params.apoio }}
       <h2 class="site-footer__titulo">Apoio</h2>
       <ul class="site-footer__lista">

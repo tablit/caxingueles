@@ -9,13 +9,11 @@ copyright = "Textos da Turma 12 — CC BY-NC-SA 4.0"
 [params]
   description = "Escritos da Turma 12 do mestrado da ESCAS — Instituto de Pesquisas Ecológicas"
 
-# Texto do rodapé, uma linha por bloco. `url` é opcional e transforma a linha em link.
+# Texto do rodapé, uma linha por bloco. Aceita Markdown, ex.: [ESCAS](https://...)
 [[params.rodape]]
   texto = "Ensaios e registros dos Caxinguelês"
 [[params.rodape]]
-  texto = "Coletivo de mestrandos da Turma 12 da ESCAS"
-[[params.rodape]]
-  texto = "Escola Superior de Conservação Ambiental e Sustentabilidade"
+  texto = "Coletivo de mestrandos da Turma 12 da ESCAS/IPÊ"
 
 # Apoiadores exibidos no rodapé. Opcionais em cada um:
 #   logo = "/img/apoio/arquivo.svg"  (versão clara, o fundo do rodapé é escuro)
