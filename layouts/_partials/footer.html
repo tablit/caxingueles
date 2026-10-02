@@ -2,7 +2,9 @@
   <div class="container site-footer__inner">
     <div>
       <a class="site-footer__logo" href="{{ "/" | relURL }}"><img src="{{ "marca/logo-horizontal-branco.svg" | relURL }}" alt="Caxinguelês" height="48"></a>
-      <p class="site-footer__texto">{{ range $i, $linha := site.Params.rodape }}{{ if $i }}<br>{{ end }}{{ $linha.texto | markdownify }}{{ end }}</p>
+      {{- with site.Params.rodape }}
+      <p class="site-footer__texto">{{ range $i, $linha := . }}{{ if $i }}<br>{{ end }}{{ $linha.texto | markdownify }}{{ end }}</p>
+      {{- end }}
       {{- with site.Params.aviso }}
       <p class="site-footer__texto" style="font-size: var(--fs-14)">* {{ . }}</p>
       {{- end }}
@@ -36,7 +38,7 @@
   </div>
   <div class="container site-footer__base">
     {{- with site.Params.licenca }}
-    <p>© {{ now.Year }} {{ site.Title }} · Textos da Turma 12 sob a licença <a rel="license" href="{{ .url }}">{{ .nome }} ({{ .sigla }})</a>.</p>
+    <p>© {{ now.Year }} {{ site.Title }} · Textos sob a licença <a rel="license" href="{{ .url }}">{{ .nome }} ({{ .sigla }})</a>.</p>
     <p style="margin-top: var(--esp-1)">{{ .resumo }}</p>
     {{- end }}
   </div>
