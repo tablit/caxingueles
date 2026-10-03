@@ -1,0 +1,49 @@
+# Decap CMS: editor em /admin. Cada texto vira um pull request a partir de um fork
+# (open authoring), então as autoras não precisam de acesso de escrita ao repositório.
+backend:
+  name: github
+  repo: tablit/caxingueles
+  branch: main
+  open_authoring: true
+  # Proxy de login (OAuth) hospedado na própria Vercel. Ainda a criar: ver o plano.
+  base_url: https://caxingueles.eco.br
+  auth_endpoint: api/auth
+
+publish_mode: editorial_workflow
+locale: pt
+site_url: https://caxingueles.eco.br
+display_url: https://caxingueles.eco.br
+
+# Imagens vão para static/img/publicacoes e saem em /img/publicacoes/...
+# O Decap não limita o tamanho: o teto de 300 KB está no template de PR.
+media_folder: static/img/publicacoes
+public_folder: /img/publicacoes
+
+collections:
+  - name: publicacoes
+    label: Textos
+    label_singular: Texto
+    folder: content/publicacoes
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} — {{author}}"
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Data, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: Autoria, name: author, widget: string, hint: "Como o nome deve aparecer no texto." }
+      - label: Categoria
+        name: categorias
+        widget: select
+        multiple: true
+        min: 1
+        options:
+          - { label: Caxinguelês, value: caxingueles }
+          - { label: Campo, value: campo }
+          - { label: Ensaios, value: ensaios }
+          - { label: Resenhas, value: resenhas }
+      - { label: Etiquetas, name: tags, widget: list, required: false }
+      - { label: Resumo, name: summary, widget: text, hint: "Uma ou duas frases, aparece nos cartões e nas buscas." }
+      - { label: Rascunho, name: draft, widget: boolean, default: false, required: false, hint: "Marcado, o texto não vai para o ar." }
+      - { label: Texto, name: body, widget: markdown, modes: [rich_text], hint: "Imagens: até 300 KB cada, com descrição alternativa." }
