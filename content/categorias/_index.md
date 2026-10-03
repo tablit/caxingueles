@@ -1,4 +1,4 @@
 ---
 title: "Categorias"
-description: "Os textos da turma, organizados por tipo."
+description: "Os textos, organizados por tipo."
 ---

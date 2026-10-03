@@ -4,10 +4,10 @@ direction = "ltr"
 weight = 1
 
 title = "Caxinguelês"
-copyright = "Textos da Turma 12 — CC BY-NC-SA 4.0"
+copyright = "Textos dos Caxinguelês — CC BY-NC-SA 4.0"
 
 [params]
-  description = "Escritos da Turma 12 do mestrado da ESCAS — Instituto de Pesquisas Ecológicas"
+  description = "Escritos dos Caxinguelês"
 
 # Texto do rodapé, uma linha por bloco. Aceita Markdown, ex.: [ESCAS](https://...)
 

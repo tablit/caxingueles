@@ -6,6 +6,6 @@ showAuthor: false
 showReadingTime: false
 ---
 
-Para falar com a turma — dúvidas, sugestões, convites —, use o formulário abaixo. As mensagens chegam por email para quem cuida do site.
+Para falar com os Caxinguelês — dúvidas, sugestões, convites —, use o formulário abaixo. As mensagens chegam por email para quem cuida do site.
 
 {{< tally >}}

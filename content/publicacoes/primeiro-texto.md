@@ -2,7 +2,7 @@
 title: "Primeiro texto"
 date: 2026-09-27
 author: "Nome Sobrenome"
-categorias: ["turma"]
+categorias: ["caxingueles"]
 tags: ["exemplo"]
 summary: "Um texto de exemplo para conferir o layout — apague quando os textos de verdade chegarem."
 draft: true
