@@ -1,0 +1,32 @@
+name: Tamanho das imagens
+
+# Falha o PR se alguma imagem adicionada ou alterada passar de 300 KB.
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  imagens:
+    name: Imagens até 300 KB
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Conferir tamanhos
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          limite=307200
+          erro=0
+          while IFS= read -r arquivo; do
+            [ -f "$arquivo" ] || continue
+            tamanho=$(stat -c %s "$arquivo")
+            if [ "$tamanho" -gt "$limite" ]; then
+              echo "::error file=$arquivo::$arquivo tem $((tamanho / 1024)) KB; o limite é 300 KB."
+              erro=1
+            fi
+          done < <(git diff --name-only --diff-filter=AM "$BASE" "$HEAD" -- 'static/img' 'assets/img' | grep -iE '\.(png|jpe?g|webp|gif)$')
+          exit $erro

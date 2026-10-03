@@ -1,7 +1,7 @@
 ## Antes de pedir revisão
 
 - [ ] Front-matter preenchido: `title`, `date`, `author`, `summary`, `categorias`
-- [ ] Categoria escolhida da lista (`ensaios`, `campo`, `resenhas`, `turma`)
+- [ ] Categoria escolhida da lista (`ensaios`, `campo`, `resenhas`, `caxingueles`)
 - [ ] Nome do arquivo em minúsculas, sem acento, com hífens
 - [ ] Preview da Vercel aberto e conferido, inclusive no celular
 - [ ] Imagens com descrição alternativa e abaixo de 300 KB
