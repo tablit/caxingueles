@@ -1,6 +1,6 @@
 ---
 title: "Contato"
-description: "Fale com a Turma 12."
+description: "Fale com os Caxinguelês."
 showDate: false
 showAuthor: false
 showReadingTime: false
