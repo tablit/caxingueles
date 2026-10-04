@@ -1,5 +1,5 @@
 ---
-title: Publicações
+title: Publicações guanabara
 date: 2026-10-03
 author: Talita Angelo Taveira
 categorias:
