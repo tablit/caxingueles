@@ -28,8 +28,11 @@ collections:
     extension: md
     format: frontmatter
     slug: "{{slug}}"
+    # Só entra na lista quem tem tipo: texto. Assim o _index.md da seção não aparece como se fosse um texto.
+    filter: { field: tipo, value: texto }
     summary: "{{title}} — {{author}}"
     fields:
+      - { label: Tipo, name: tipo, widget: hidden, default: texto }
       - { label: Título, name: title, widget: string }
       - { label: Data, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
       - { label: Autoria, name: author, widget: string, hint: "Como o nome deve aparecer no texto." }
