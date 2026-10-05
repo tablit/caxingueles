@@ -9,7 +9,7 @@ tags:
   - exemplo
 summary: Um texto de exemplo para conferir o layout — apague quando os textos de
   verdade chegarem.
-draft: false
+draft: true
 ---
 
 Este arquivo existe para você ver como um texto fica no site antes de publicar o primeiro de verdade. Ele está com `draft: true`, então aparece no preview local (`hugo server -D`) e **não** vai para o ar.
