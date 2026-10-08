@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="{{ "marca/apple-touch-icon-180.png" | relURL }}">
 <meta name="theme-color" content="#00833F">
 {{- $og := "marca/og-image-padrao.png" | absURL -}}
-{{- with .Params.capa }}{{ $og = . | absURL }}{{ end }}
+{{- with partial "capa-url.html" (dict "pagina" . "largura" 1200 "opcoes" "jpg q85" "absoluto" true) }}{{ $og = . }}{{ end }}
 <meta property="og:site_name" content="{{ site.Title }}">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">

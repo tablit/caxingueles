@@ -1,39 +1,78 @@
 // Atalho de lixeira em cada texto da lista do /admin.
-// O Decap não tem botão de apagar na lista; aqui apagamos o arquivo do texto pela API do GitHub,
-// com o mesmo token do login (só funciona para quem tem acesso de escrita ao repositório).
+// O Decap não tem botão de apagar na lista; aqui apagamos o texto pela API do GitHub, com o mesmo
+// token do login (só funciona para quem tem acesso de escrita ao repositório).
+// Um texto é uma pasta (content/publicacoes/<texto>/ com index.md e as imagens): a pasta inteira vai
+// embora em um único commit. Textos antigos, de um arquivo só (<texto>.md), também são aceitos.
 (function () {
   var REPO = 'tablit/caxingueles';
   var BRANCH = 'main';
   var PASTA = 'content/publicacoes';
+  var API = 'https://api.github.com/repos/' + REPO;
 
   function slugValido(slug) {
     return /^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(slug);
   }
 
-  function urlDoArquivo(slug) {
-    return 'https://api.github.com/repos/' + REPO + '/contents/' + PASTA + '/' + encodeURIComponent(slug) + '.md';
+  function cabecalhos(token, comCorpo) {
+    var h = { Authorization: 'token ' + token, Accept: 'application/vnd.github+json' };
+    if (comCorpo) h['Content-Type'] = 'application/json';
+    return h;
   }
 
-  // Apaga content/publicacoes/<slug>.md na main. Lança Error com mensagem legível se falhar.
-  function apagarTexto(slug, token, buscar) {
+  function json(buscar, url, opcoes, erroMsg) {
+    return buscar(url, opcoes).then(function (r) {
+      if (r.status === 403 || r.status === 404 || r.status === 422) {
+        throw new Error(erroMsg + ' Sem permissão ou item não encontrado (erro ' + r.status + '). É preciso ter acesso de escrita ao repositório.');
+      }
+      if (!r.ok) throw new Error(erroMsg + ' (erro ' + r.status + ').');
+      return r.json();
+    });
+  }
+
+  // Descobre o que seria apagado. Devolve { arquivos: [caminhos], base: shaDoCommit, arvore: shaDaArvore }.
+  function listarArquivos(slug, token, buscar) {
     if (!slugValido(slug)) return Promise.reject(new Error('Texto inválido.'));
-    var cabecalhos = { Authorization: 'token ' + token, Accept: 'application/vnd.github+json' };
-    return buscar(urlDoArquivo(slug) + '?ref=' + BRANCH, { headers: cabecalhos })
-      .then(function (r) {
-        if (r.status === 404) throw new Error('O arquivo deste texto não foi encontrado.');
-        if (!r.ok) throw new Error('Não foi possível ler o texto (erro ' + r.status + ').');
-        return r.json();
+    var h = { headers: cabecalhos(token) };
+    var base, arvore;
+    return json(buscar, API + '/git/ref/heads/' + BRANCH, h, 'Não foi possível ler o site.')
+      .then(function (ref) {
+        base = ref.object.sha;
+        return json(buscar, API + '/git/commits/' + base, h, 'Não foi possível ler o site.');
       })
-      .then(function (arquivo) {
-        return buscar(urlDoArquivo(slug), {
-          method: 'DELETE',
-          headers: Object.assign({ 'Content-Type': 'application/json' }, cabecalhos),
-          body: JSON.stringify({ message: 'Remove texto "' + slug + '"', sha: arquivo.sha, branch: BRANCH }),
-        });
+      .then(function (commit) {
+        arvore = commit.tree.sha;
+        return json(buscar, API + '/git/trees/' + arvore + '?recursive=1', h, 'Não foi possível ler o site.');
       })
-      .then(function (r) {
-        if (r.status === 403 || r.status === 404) throw new Error('Sem permissão para apagar. É preciso ter acesso de escrita ao repositório.');
-        if (!r.ok) throw new Error('Não foi possível apagar (erro ' + r.status + ').');
+      .then(function (dados) {
+        if (dados.truncated) throw new Error('O repositório é grande demais para esta operação.');
+        var pasta = PASTA + '/' + slug + '/';
+        var antigo = PASTA + '/' + slug + '.md';
+        var arquivos = dados.tree
+          .filter(function (n) { return n.type === 'blob' && (n.path.indexOf(pasta) === 0 || n.path === antigo); })
+          .map(function (n) { return n.path; });
+        if (!arquivos.length) throw new Error('Os arquivos deste texto não foram encontrados.');
+        return { arquivos: arquivos, base: base, arvore: arvore };
+      });
+  }
+
+  // Apaga os arquivos em um único commit na main.
+  function apagarArquivos(slug, plano, token, buscar) {
+    var corpo = function (obj) { return { method: 'POST', headers: cabecalhos(token, true), body: JSON.stringify(obj) }; };
+    return json(buscar, API + '/git/trees', corpo({
+      base_tree: plano.arvore,
+      tree: plano.arquivos.map(function (p) { return { path: p, mode: '100644', type: 'blob', sha: null }; }),
+    }), 'Não foi possível preparar a remoção.')
+      .then(function (arvore) {
+        return json(buscar, API + '/git/commits', corpo({
+          message: 'Remove texto "' + slug + '"',
+          tree: arvore.sha,
+          parents: [plano.base],
+        }), 'Não foi possível registrar a remoção.');
+      })
+      .then(function (commit) {
+        return json(buscar, API + '/git/refs/heads/' + BRANCH, {
+          method: 'PATCH', headers: cabecalhos(token, true), body: JSON.stringify({ sha: commit.sha }),
+        }, 'Não foi possível publicar a remoção (alguém pode ter publicado ao mesmo tempo; tente de novo).');
       });
   }
 
@@ -62,16 +101,20 @@
     function acionar(e) {
       e.preventDefault();
       e.stopPropagation();
-      var titulo = card.querySelector('h1, h2, h3, h4');
-      var nome = (titulo && titulo.textContent.trim()) || slug;
-      if (!window.confirm('Apagar o texto "' + nome + '"?\n\nA remoção vai ao ar no site e não dá para desfazer por aqui.')) return;
+      if (botao.getAttribute('data-ocupado')) return;
       var token = tokenDoLogin();
       if (!token) { window.alert('Entre de novo com o GitHub e tente outra vez.'); return; }
+      var titulo = card.querySelector('h1, h2, h3, h4');
+      var nome = (titulo && titulo.textContent.trim()) || slug;
+      botao.setAttribute('data-ocupado', '1');
       botao.style.opacity = '0.4';
-      apagarTexto(slug, token, window.fetch.bind(window)).then(
-        function () { card.style.display = 'none'; },
-        function (erro) { botao.style.opacity = ''; window.alert(erro.message); }
-      );
+      var liberar = function () { botao.removeAttribute('data-ocupado'); botao.style.opacity = ''; };
+      listarArquivos(slug, token, window.fetch.bind(window)).then(function (plano) {
+        var imagens = plano.arquivos.filter(function (p) { return !/\.md$/.test(p); }).length;
+        var resumo = imagens ? 'O texto e ' + imagens + (imagens === 1 ? ' imagem serão apagados.' : ' imagens serão apagadas.') : 'O texto será apagado.';
+        if (!window.confirm('Apagar "' + nome + '"?\n\n' + resumo + ' A remoção vai ao ar no site e não dá para desfazer por aqui.')) { liberar(); return; }
+        return apagarArquivos(slug, plano, token, window.fetch.bind(window)).then(function () { card.style.display = 'none'; });
+      }).catch(function (erro) { liberar(); window.alert(erro.message); });
     }
     botao.addEventListener('click', acionar);
     botao.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') acionar(e); });
@@ -80,21 +123,28 @@
     card.appendChild(botao);
   }
 
+  // O endereço de um texto em pasta termina em <texto>/index; o de um texto antigo, em <texto>.
+  function slugDoLink(href) {
+    var m = /#\/collections\/publicacoes\/entries\/([^?#]+)$/.exec(href || '');
+    if (!m) return null;
+    var slug;
+    try { slug = decodeURIComponent(m[1]); } catch (e) { return null; }
+    slug = slug.replace(/\/index$/, '');
+    return slugValido(slug) ? slug : null;
+  }
+
   function varrer() {
     document.querySelectorAll('a[href*="#/collections/publicacoes/entries/"]').forEach(function (card) {
       if (card.getAttribute('data-lixeira')) return;
-      var m = /#\/collections\/publicacoes\/entries\/([^/?#]+)$/.exec(card.getAttribute('href') || '');
-      if (!m) return;
-      var slug;
-      try { slug = decodeURIComponent(m[1]); } catch (e) { return; }
-      if (!slugValido(slug)) return;
+      var slug = slugDoLink(card.getAttribute('href'));
+      if (!slug) return;
       card.setAttribute('data-lixeira', '1');
       adicionarLixeira(card, slug);
     });
   }
 
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { apagarTexto: apagarTexto, slugValido: slugValido };
+    module.exports = { listarArquivos: listarArquivos, apagarArquivos: apagarArquivos, slugValido: slugValido, slugDoLink: slugDoLink };
     return;
   }
   new MutationObserver(varrer).observe(document.body, { childList: true, subtree: true });
