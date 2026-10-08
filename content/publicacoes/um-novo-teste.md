@@ -6,6 +6,9 @@ author: Talita A.
 categorias:
   - caxingueles
 summary: Aqui fica o resumo sobre o texto postado
+capa: /img/publicacoes/lidar.png
+capa_alt: Essa é a descricão opcional da capa
+capa_legenda: E essa é a legenda da capa
 draft: false
 ---
 # Um texto de teste
