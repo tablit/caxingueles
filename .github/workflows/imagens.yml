@@ -1,7 +1,11 @@
 name: Tamanho das imagens
 
-# Falha o PR se alguma imagem adicionada ou alterada passar de 300 KB.
-on: pull_request
+# Falha se alguma imagem adicionada ou alterada passar de 300 KB. Em push na main (textos do editor)
+# o aviso vem depois do commit: o Decap não tem como barrar o tamanho antes de salvar.
+on:
+  pull_request:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
@@ -16,8 +20,8 @@ jobs:
           fetch-depth: 0
       - name: Conferir tamanhos
         env:
-          BASE: ${{ github.event.pull_request.base.sha }}
-          HEAD: ${{ github.event.pull_request.head.sha }}
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           limite=307200
           erro=0

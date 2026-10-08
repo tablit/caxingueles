@@ -1,21 +1,26 @@
-# Decap CMS: editor em /admin. Cada texto vira um pull request a partir de um fork
-# (open authoring), então as autoras não precisam de acesso de escrita ao repositório.
+# Decap CMS: editor em /admin, só para mantenedores. Publicar salva o texto direto na main
+# (sem PR), então só quem tem acesso de escrita ao repositório consegue salvar.
+commit_messages:
+  create: 'Novo texto "{{slug}}"'
+  update: 'Atualiza texto "{{slug}}"'
+  delete: 'Remove texto "{{slug}}"'
+  uploadMedia: 'Envia imagem "{{path}}"'
+  deleteMedia: 'Remove imagem "{{path}}"'
+
 backend:
   name: github
   repo: tablit/caxingueles
   branch: main
-  open_authoring: true
-  # Proxy de login (OAuth) hospedado na própria Vercel. Ainda a criar: ver o plano.
+  # Proxy de login (OAuth) hospedado na própria Vercel: ver api/auth.js e api/callback.js.
   base_url: https://caxingueles.eco.br
   auth_endpoint: api/auth
 
-publish_mode: editorial_workflow
 locale: pt
 site_url: https://caxingueles.eco.br
 display_url: https://caxingueles.eco.br
 
 # Imagens vão para static/img/publicacoes e saem em /img/publicacoes/...
-# O Decap não limita o tamanho: o teto de 300 KB está no template de PR.
+# O Decap não limita o tamanho: o teto de 300 KB é conferido depois pelo workflow "Imagens até 300 KB".
 media_folder: static/img/publicacoes
 public_folder: /img/publicacoes
 
@@ -25,6 +30,7 @@ collections:
     label_singular: Texto
     folder: content/publicacoes
     create: true
+    delete: false # sem botão de apagar no editor; remover um texto é pelo GitHub
     extension: md
     format: frontmatter
     slug: "{{slug}}"
