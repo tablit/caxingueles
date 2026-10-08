@@ -10,7 +10,7 @@ tags:
 summary: Um pequeno teste final
 capa: lidar.png
 capa_legenda: Uma breve jegenda
-draft: false
+draft: true
 ---
 Esse aqui é um texto
 
