@@ -32,7 +32,8 @@ Como funciona:
 - Quem consegue salvar é quem tem acesso de escrita ao repositório; qualquer outra conta entra na tela, mas o commit é recusado.
 - A única coleção é Textos (`content/publicacoes`), filtrada por `tipo: texto`. Sem coleções para Início, Sobre, Contato ou Categorias, e sem botão de apagar.
 - Imagens vão para `static/img/publicacoes/`. O limite de 300 KB é conferido pelo workflow `Imagens até 300 KB`.
-- A regra de repositório "Proteger main" mantém: exigência de PR, bloqueio de apagar e de force push. O papel de admin contorna a exigência de PR (`bypass_mode: always`) para o editor poder commitar.
+- A regra de repositório "Proteger main" mantém: exigência de PR, bloqueio de apagar e de force push. Os papéis de admin e de escrita contornam a exigência de PR (`bypass_mode: always`) para o editor poder commitar.
+- Mantenedores: `tablit` (admin) e `EdsonSarti` (colaborador com escrita, convidado em 2026-10-08). Contas pessoais do GitHub só oferecem o nível de escrita para colaboradores, sem "Maintain"; a pessoa não altera configurações do repositório nem a regra da `main`.
 
 ### Positive Consequences
 
@@ -47,7 +48,7 @@ Como funciona:
 - Rascunhos (`draft: true`) ficam legíveis no GitHub, porque o repositório é público.
 - Cada salvamento gera um deploy; há um teto diário no plano Hobby (conferir o número atual).
 - O editor ainda permite editar textos já publicados; o Decap não permite proibir isso.
-- Um segundo mantenedor precisa de papel com escrita e de entrar na lista de quem contorna a regra da `main`.
+- Todo novo mantenedor recebe o papel de escrita, que já contorna a regra da `main`: quem entra pode publicar direto, sem revisão.
 
 ## Pros and Cons of the Options
 
