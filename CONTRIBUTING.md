@@ -27,14 +27,7 @@ Clique em **Novo Texto** e preencha:
 | Rascunho | Marcado, o texto não vai para o ar |
 | Texto | O corpo, em um editor visual (negrito, itálico, links, títulos, listas, citações, imagens) |
 
-As categorias são quatro:
-
-| Categoria | Para que serve |
-| --- | --- |
-| Ensaios | Texto autoral longo |
-| Campo | Relato de saída, visita, disciplina prática |
-| Resenhas | Leitura comentada |
-| Caxinguelês | Avisos, retrospectivas, o que é do coletivo |
+As categorias saem da seção **Categorias** do editor (veja "Categorias", mais abaixo). Hoje há quatro: Ensaios (texto autoral longo), Campo (relato de saída, visita, disciplina prática), Resenhas (leitura comentada) e Caxinguelês (avisos, retrospectivas, o que é do coletivo).
 
 ### Imagens
 
@@ -55,7 +48,15 @@ A pasta e o endereço saem do título, de forma automática: só minúsculas, se
 
 Para ver como o texto fica enquanto escreve, use o painel de pré-visualização ao lado do editor. A pré-visualização é aproximada; o visual final é o do site.
 
-## 4. Apague um texto
+## 4. Gerencie as categorias
+
+Na seção **Categorias** do editor, clique em **Nova Categoria** e preencha o nome, uma descrição curta e a cor. A categoria passa a aparecer na escolha de categorias dos textos e ganha a própria página no site (`/categorias/<identificador>/`).
+
+- O identificador (o endereço) sai do nome na criação, pelas mesmas regras dos textos, e **não muda** depois. Editar o nome ou a descrição só muda o que aparece no site.
+- Não há botão de apagar categorias, porque textos podem estar usando uma. Para remover, apague o arquivo `data/categorias/<identificador>.yml` pelo GitHub, depois de tirar a categoria dos textos que a usam.
+- Uma categoria só aparece nas listas do site quando tem pelo menos um texto.
+
+## 5. Apague um texto
 
 Na lista de Textos, cada item tem uma **lixeira**. Ela pede confirmação e apaga a pasta inteira, com as imagens, de uma vez. A remoção vai ao ar no site. O histórico do repositório guarda o texto, então ele pode ser recuperado pelo GitHub.
 

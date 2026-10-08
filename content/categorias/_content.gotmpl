@@ -1,0 +1,11 @@
+{{- /* Cria a página de cada categoria a partir de data/categorias/<nome>.yml (editado pelo /admin).
+       O nome do arquivo é o identificador que os textos usam em `categorias:` e o endereço da categoria. */ -}}
+{{- range $nome, $c := hugo.Data.categorias }}
+  {{- $.AddPage (dict
+      "path" $nome
+      "kind" "term"
+      "title" $c.title
+      "description" $c.description
+      "params" (dict "ipe" $c.ipe)
+  ) }}
+{{- end }}

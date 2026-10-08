@@ -60,14 +60,14 @@ collections:
       - { label: Autoria, name: author, widget: string, hint: "Como o nome deve aparecer no texto." }
       - label: Categoria
         name: categorias
-        widget: select
+        widget: relation
+        collection: categorias
+        search_fields: [title]
+        value_field: "{{slug}}" # o identificador da categoria (nome do arquivo em data/categorias)
+        display_fields: [title]
         multiple: true
         min: 1
-        options:
-          - { label: Caxinguelês, value: caxingueles }
-          - { label: Campo, value: campo }
-          - { label: Ensaios, value: ensaios }
-          - { label: Resenhas, value: resenhas }
+        hint: "As categorias são criadas na seção Categorias."
       - { label: Etiquetas, name: tags, widget: list, required: false }
       - { label: Resumo, name: summary, widget: text, hint: "Uma ou duas frases, aparece nos cartões e nas buscas." }
       - label: Imagem de capa
@@ -79,3 +79,30 @@ collections:
       - { label: Legenda da capa, name: capa_legenda, widget: string, required: false, hint: "Opcional. Aparece sob a imagem no topo do artigo." }
       - { label: Rascunho, name: draft, widget: boolean, default: false, required: false, hint: "Marcado, o texto não vai para o ar." }
       - { label: Texto, name: body, widget: markdown, modes: [rich_text], editor_components: [image], hint: "Imagens em JPEG ou PNG, com descrição alternativa." }
+
+  # Categorias: um arquivo por categoria em data/categorias/<identificador>.yml. O identificador sai do
+  # título na criação e não muda depois (mudar o título só muda o nome exibido). Sem botão de apagar:
+  # textos podem usar a categoria, então remover uma é pelo GitHub.
+  - name: categorias
+    label: Categorias
+    label_singular: Categoria
+    folder: data/categorias
+    extension: yml
+    format: yml
+    create: true
+    delete: false
+    slug: "{{title | truncate(49, '_')}}"
+    summary: "{{title}}"
+    fields:
+      - { label: Nome, name: title, widget: string }
+      - { label: Descrição, name: description, widget: text, hint: "Uma frase. Aparece na página da categoria." }
+      - label: Cor
+        name: ipe
+        widget: select
+        default: broto
+        options:
+          - { label: Verde (broto), value: broto }
+          - { label: Amarelo, value: amarelo }
+          - { label: Rosa, value: rosa }
+          - { label: Roxo, value: roxo }
+          - { label: Laranja, value: laranja }
