@@ -30,7 +30,7 @@ Chosen option: **Decap CMS sem PR, só para mantenedores**. O open authoring che
 Como funciona:
 - `/admin` carrega o Decap (`static/admin/`); o login passa por GitHub OAuth, com um proxy em duas funções da Vercel (`api/auth.js`, `api/callback.js`). `GITHUB_CLIENT_ID` e `GITHUB_CLIENT_SECRET` ficam só nas variáveis de ambiente da Vercel.
 - Quem consegue salvar é quem tem acesso de escrita ao repositório; qualquer outra conta entra na tela, mas o commit é recusado.
-- A única coleção é Textos (`content/publicacoes`), filtrada por `tipo: texto`. Sem coleções para Início, Sobre, Contato ou Categorias, e sem botão de apagar.
+- A única coleção é Textos (`content/publicacoes`), filtrada por `tipo: texto`. Sem coleções para Início, Sobre, Contato ou Categorias. Apagar um texto é possível pela página do texto ou pela lixeira em cada item da lista (`static/admin/lixeira.js`, que apaga o arquivo pela API do GitHub com o token do login).
 - Imagens vão para `static/img/publicacoes/`. O limite de 300 KB é conferido pelo workflow `Imagens até 300 KB`.
 - A regra de repositório "Proteger main" mantém: exigência de PR, bloqueio de apagar e de force push. Os papéis de admin e de escrita contornam a exigência de PR (`bypass_mode: always`) para o editor poder commitar.
 - Mantenedores: `tablit` (admin) e `EdsonSarti` (colaborador com escrita, convidado em 2026-10-08). Contas pessoais do GitHub só oferecem o nível de escrita para colaboradores, sem "Maintain"; a pessoa não altera configurações do repositório nem a regra da `main`.

@@ -30,7 +30,7 @@ collections:
     label_singular: Texto
     folder: content/publicacoes
     create: true
-    delete: false # sem botão de apagar no editor; remover um texto é pelo GitHub
+    delete: true # além do botão na página do texto, a lista tem uma lixeira (static/admin/lixeira.js)
     extension: md
     format: frontmatter
     slug: "{{slug}}"
