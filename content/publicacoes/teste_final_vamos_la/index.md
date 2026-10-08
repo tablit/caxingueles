@@ -14,10 +14,6 @@ draft: false
 ---
 Esse aqui é um texto
 
-
-
-Veja como ele é bonito
-
-
+Veja como ele é bonito, lindissimo
 
 ![uma imagem](lidar_2.png "fonte: uma fonte")
