@@ -22,6 +22,9 @@
         document.querySelectorAll('li, [role="menuitem"]').forEach(function (el) {
           if (sobrando.test((el.textContent || '').trim())) el.style.display = 'none';
         });
+        // A seção "Mídia" do menu do topo (biblioteca solta de imagens) não é usada: as imagens
+        // pertencem a cada texto. O Decap não tem opção para escondê-la.
+        document.querySelectorAll('a[href="#/media"]').forEach(function (el) { el.style.display = 'none'; });
         // Rede de segurança: o botão de imagem por endereço não deve aparecer em lugar nenhum.
         document.querySelectorAll('button').forEach(function (el) {
           if (porUrl.test((el.textContent || '').trim())) el.style.display = 'none';
