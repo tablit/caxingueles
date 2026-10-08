@@ -21,7 +21,7 @@ display_url: https://caxingueles.eco.br
 
 # Cada texto é uma pasta (content/publicacoes/<texto>/index.md) e suas imagens ficam dentro dela
 # (media_folder vazio, definido na coleção). O Hugo reduz e converte as imagens para WebP no build.
-# O Decap não limita o tamanho: o teto de 300 KB é conferido depois pelo workflow "Imagens até 300 KB".
+# Não há limite de tamanho: o Hugo reduz as imagens ao publicar. O workflow de imagens só recusa HEIC/HEIF.
 media_folder: static/img/publicacoes
 public_folder: /img/publicacoes
 
@@ -67,8 +67,8 @@ collections:
         widget: image
         required: false
         choose_url: false # só envio de arquivo do computador, sem colar endereço
-        hint: "Opcional. Aparece no cartão do texto (Início, Publicações e categorias) e no topo do artigo. Até 300 KB; o site reduz e converte para WebP."
+        hint: "Opcional. Aparece no cartão do texto (Início, Publicações e categorias) e no topo do artigo. O site reduz e converte para WebP."
       - { label: Descrição da capa, name: capa_alt, widget: string, required: false, hint: "Para leitores de tela. Preencha se enviou uma capa." }
       - { label: Legenda da capa, name: capa_legenda, widget: string, required: false, hint: "Opcional. Aparece sob a imagem no topo do artigo." }
       - { label: Rascunho, name: draft, widget: boolean, default: false, required: false, hint: "Marcado, o texto não vai para o ar." }
-      - { label: Texto, name: body, widget: markdown, modes: [rich_text], hint: "Imagens: até 300 KB cada, com descrição alternativa." }
+      - { label: Texto, name: body, widget: markdown, modes: [rich_text], hint: "Imagens em JPEG ou PNG, com descrição alternativa." }

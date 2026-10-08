@@ -1,7 +1,7 @@
-name: Tamanho das imagens
+name: Formato das imagens
 
-# Falha se alguma imagem adicionada ou alterada passar de 300 KB. Em push na main (textos do editor)
-# o aviso vem depois do commit: o Decap não tem como barrar o tamanho antes de salvar.
+# Falha se uma imagem HEIC/HEIF for adicionada (o Hugo não lê esses formatos). Não há limite de tamanho:
+# o Hugo reduz as imagens ao publicar. Em push na main (textos do editor) o aviso vem depois do commit.
 on:
   pull_request:
   push:
@@ -12,27 +12,18 @@ permissions:
 
 jobs:
   imagens:
-    name: Imagens até 300 KB
+    name: Imagens em formato aceito
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Conferir tamanhos
+      - name: Conferir formatos
         env:
           BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
           HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
-          limite=307200
           erro=0
-          while IFS= read -r arquivo; do
-            [ -f "$arquivo" ] || continue
-            tamanho=$(stat -c %s "$arquivo")
-            if [ "$tamanho" -gt "$limite" ]; then
-              echo "::error file=$arquivo::$arquivo tem $((tamanho / 1024)) KB; o limite é 300 KB."
-              erro=1
-            fi
-          done < <(git diff --name-only --diff-filter=AM "$BASE" "$HEAD" -- 'static/img' 'assets/img' 'content' | grep -iE '\.(png|jpe?g|webp|gif)$')
           # O Hugo não lê HEIC/HEIF (fotos de iPhone): o texto ficaria sem imagem.
           while IFS= read -r arquivo; do
             echo "::error file=$arquivo::$arquivo é HEIC/HEIF, que o site não processa. Exporte como JPEG ou PNG."
