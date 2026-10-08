@@ -16,6 +16,13 @@ backend:
   auth_endpoint: api/auth
 
 locale: pt
+
+# Pasta e endereço de cada texto: ASCII, sem acento, minúsculas, "_" no lugar de espaços e símbolos.
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "_"
+
 site_url: https://caxingueles.eco.br
 display_url: https://caxingueles.eco.br
 
@@ -36,12 +43,13 @@ collections:
     delete: false
     extension: md
     format: frontmatter
-    slug: "{{slug}}"
+    # A pasta do texto sai do título: minúsculas, sem acento, "_" entre as palavras, no máximo 50 caracteres.
+    # O corte usa "_" como reticências, que o Decap apaga do fim: títulos de até 50 caracteres ficam inteiros,
+    # os maiores são cortados em 49.
+    slug: "{{title | truncate(49, '_')}}"
     path: "{{slug}}/index"
     media_folder: ""
     public_folder: ""
-    nested: { depth: 100, summary: "{{title}}" }
-    meta: { path: { widget: string, label: "Pasta do texto", index_file: index } }
     # Só entra na lista quem tem tipo: texto. Assim o _index.md da seção não aparece como se fosse um texto.
     filter: { field: tipo, value: texto }
     summary: "{{title}} — {{author}}"
@@ -68,7 +76,6 @@ collections:
         required: false
         choose_url: false # só envio de arquivo do computador, sem colar endereço
         hint: "Opcional. Aparece no cartão do texto (Início, Publicações e categorias) e no topo do artigo. O site reduz e converte para WebP."
-      - { label: Descrição da capa, name: capa_alt, widget: string, required: false, hint: "Para leitores de tela. Preencha se enviou uma capa." }
       - { label: Legenda da capa, name: capa_legenda, widget: string, required: false, hint: "Opcional. Aparece sob a imagem no topo do artigo." }
       - { label: Rascunho, name: draft, widget: boolean, default: false, required: false, hint: "Marcado, o texto não vai para o ar." }
       - { label: Texto, name: body, widget: markdown, modes: [rich_text], hint: "Imagens em JPEG ou PNG, com descrição alternativa." }
