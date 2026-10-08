@@ -1,104 +1,112 @@
 # Como publicar um texto
 
-Dá para fazer tudo pelo navegador, sem instalar nada e sem saber git. São cinco minutos.
+Quem mantém o site publica pelo editor em **https://caxingueles.eco.br/admin**, sem instalar nada e sem saber git. Cada texto vira uma pasta no repositório, com as imagens dentro dela, e o site se atualiza sozinho.
 
-## 1. Escreva o texto
+Para entrar é preciso uma conta no GitHub com acesso de escrita ao repositório (hoje, as pessoas mantenedoras). Quem não tem esse acesso consegue abrir a tela de login, mas não consegue salvar nada.
 
-Escreva onde você preferir (Word, Google Docs, papel). Na hora de publicar, o texto vira um arquivo com marcações simples:
+## 1. Entre no editor
 
-```
-## Um subtítulo
-**negrito**  _itálico_
-[o texto do link](https://endereco-do-link)
+1. Abra https://caxingueles.eco.br/admin
+2. Clique em **Login with GitHub** e autorize o app, se o GitHub pedir.
+3. Você vê a lista de **Textos**.
 
-> uma citação
-```
+## 2. Escreva o texto
 
-## 2. Crie o arquivo no GitHub
+Clique em **Novo Texto** e preencha:
 
-1. Abra https://github.com/tablit/caxingueles
-2. Clique em **Add file** › **Create new file**
-3. No campo do nome, escreva o caminho inteiro:
-   `content/publicacoes/nome-do-seu-texto.md`
-   - só minúsculas, sem acento, sem cedilha, espaços viram hífen
-   - esse nome vira o endereço do texto: `caxingueles.eco.br/publicacoes/nome-do-seu-texto/`
-4. Cole o bloco abaixo no começo do arquivo e preencha:
+| Campo | O que colocar |
+| --- | --- |
+| Título | O título do texto. Ele também define o endereço (veja "O endereço do texto") |
+| Data | A data de publicação |
+| Autoria | Como o nome deve aparecer no texto |
+| Categoria | Uma ou mais, da lista abaixo |
+| Etiquetas | Opcional. Palavras-chave |
+| Resumo | Uma ou duas frases. É o que aparece nos cartões e nas buscas |
+| Imagem de capa | Opcional. Botão que abre a escolha de um arquivo do computador |
+| Legenda da capa | Opcional. Aparece sob a imagem no topo do artigo |
+| Rascunho | Marcado, o texto não vai para o ar |
+| Texto | O corpo, em um editor visual (negrito, itálico, links, títulos, listas, citações, imagens) |
 
-```yaml
----
-title: "O título do seu texto"
-date: 2026-10-02
-author: "Seu Nome"
-categorias: ["ensaios"]
-summary: "Uma ou duas frases. É o que aparece na home e na lista."
-draft: true
----
-```
-
-5. Abaixo do bloco, cole o seu texto.
-
-As categorias são quatro, escolha uma:
+As categorias são quatro:
 
 | Categoria | Para que serve |
 | --- | --- |
-| `ensaios` | Texto autoral longo |
-| `campo` | Relato de saída, visita, disciplina prática |
-| `resenhas` | Leitura comentada |
-| `turma` | Avisos, retrospectivas, o que é da turma |
+| Ensaios | Texto autoral longo |
+| Campo | Relato de saída, visita, disciplina prática |
+| Resenhas | Leitura comentada |
+| Caxinguelês | Avisos, retrospectivas, o que é do coletivo |
 
-### Recursos opcionais do texto
+### Imagens
 
-- **Imagem de capa:** suba a imagem em `static/img/publicacoes/` (veja "Imagens", mais abaixo) e acrescente ao bloco do começo:
-  ```yaml
-  capa: "/img/publicacoes/nome-da-imagem.jpg"
-  capa_alt: "Descrição da imagem para quem não enxerga"
-  capa_legenda: "Legenda. Foto: Nome do autor."
-  ```
+- **Capa:** use o botão **Imagem de capa** e escolha o arquivo no computador.
+- **No corpo do texto:** use o botão de imagem do editor (ou o **+**), escolha o arquivo e preencha a descrição, que serve a quem não enxerga a imagem. O título é opcional e aparece como legenda da figura.
+- As imagens ficam na pasta do próprio texto. Não é preciso comprimir: o site reduz e converte para WebP ao publicar, e não há limite de tamanho.
+- Use JPEG ou PNG. HEIC, o formato de fotos de iPhone, não funciona: o site ficaria sem a imagem. Exporte como JPEG antes.
+
+### O endereço do texto
+
+A pasta e o endereço saem do título, de forma automática: só minúsculas, sem acento, com `_` entre as palavras e no máximo 50 caracteres (títulos maiores são cortados). O título "Floradas do Cerrado" vira a pasta `floradas_do_cerrado` e o endereço `caxingueles.eco.br/publicacoes/floradas_do_cerrado/`. Depois de publicado, o título pode mudar sem mudar o endereço.
+
+## 3. Publique
+
+1. Para guardar sem publicar, marque **Rascunho**.
+2. Para publicar, desmarque **Rascunho** e clique em **Publicar**.
+3. O texto é salvo direto no repositório e o site se atualiza em cerca de um minuto. **Não há revisão** entre o clique e o site: confira antes de publicar.
+
+Para ver como o texto fica enquanto escreve, use o painel de pré-visualização ao lado do editor. A pré-visualização é aproximada; o visual final é o do site.
+
+## 4. Apague um texto
+
+Na lista de Textos, cada item tem uma **lixeira**. Ela pede confirmação e apaga a pasta inteira, com as imagens, de uma vez. A remoção vai ao ar no site. O histórico do repositório guarda o texto, então ele pode ser recuperado pelo GitHub.
+
+## Outros recursos, só pelo GitHub
+
+O editor cobre o que é comum. Para os itens abaixo, edite o arquivo `index.md` do texto pelo GitHub (`content/publicacoes/<pasta-do-texto>/index.md`), no bloco do começo ou no corpo:
+
 - **Referências:** uma lista no bloco do começo, cada item em uma linha:
   ```yaml
   referencias:
     - "Sobrenome, A. (2020). Título do artigo. *Periódico*, 1, 1–10."
   ```
-- **Caixa "Você sabia?":**
+- **Caixa "Você sabia?"**, no corpo do texto:
   ```
   {{< destaque titulo="Você sabia?" >}}
   Uma curiosidade curta.
   {{< /destaque >}}
   ```
 - **Sumário no topo:** `showTableOfContents: true` no bloco do começo, para textos longos com vários subtítulos.
+- **Imagem com legenda no corpo**, em Markdown (o arquivo fica na pasta do texto):
+  ```
+  ![Gráfico de barras com as floradas por mês](grafico.png "Figura 1. Floradas ao longo do ano.")
+  ```
 
-## 3. Abra o pull request
-
-1. Role até o fim da página e clique em **Commit changes**
-2. Escolha **Create a new branch for this commit and start a pull request**
-3. Clique em **Propose changes** e depois em **Create pull request**
-
-## 4. Confira o preview
-
-Em um ou dois minutos, um comentário automático da Vercel aparece no pull request com um link. Esse link mostra o site inteiro já com o seu texto — é nele que a revisão acontece, não no Markdown.
-
-Pediram ajustes? Edite o arquivo na mesma branch e o preview se atualiza sozinho.
-
-## 5. Publique
-
-Quando o texto estiver aprovado:
-
-1. Troque `draft: true` por `draft: false`
-2. Quem tem permissão faz o merge
-3. O site se atualiza sozinho em cerca de um minuto
-
-## Imagens
-
-Suba o arquivo em `static/img/publicacoes/` (no GitHub: abra a pasta e use **Add file** › **Upload files**) e chame no texto assim:
+## Como o repositório guarda um texto
 
 ```
-![descrição da imagem para quem não enxerga](/img/publicacoes/nome-do-arquivo.jpg)
+content/publicacoes/floradas_do_cerrado/
+  index.md      o texto, com um bloco de dados no começo
+  capa.jpg      a capa
+  grafico.png   imagens do corpo
 ```
 
-Uma imagem sozinha num parágrafo vira figura. Para ter legenda, escreva o texto entre aspas depois do endereço:
+O bloco de dados no começo do `index.md`:
 
-```
-![Gráfico de barras com as floradas por mês](/img/publicacoes/grafico.png "Figura 1. Floradas ao longo do ano.")
+```yaml
+---
+tipo: texto
+title: "Floradas do Cerrado"
+date: 2026-10-08
+author: "Seu Nome"
+categorias: ["campo"]
+summary: "Uma ou duas frases."
+capa: capa.jpg
+capa_legenda: "Legenda. Foto: Nome."
+draft: false
+---
 ```
 
-Não é preciso comprimir a imagem antes de subir: o site reduz e converte para WebP ao publicar. Use JPEG ou PNG (HEIC, o formato de fotos de iPhone, não funciona).
+O `tipo: texto` é o que faz o texto aparecer na lista do editor; sem ele o texto continua no site, mas some da lista. Textos criados pelo editor já saem com ele.
+
+## Mudanças no código do site
+
+Layout, configuração e o próprio editor mudam por pull request, não pelo `/admin`. A regra da `main` exige PR, e o template de PR lembra de conferir o build. As decisões de arquitetura estão em `docs/adr/`.

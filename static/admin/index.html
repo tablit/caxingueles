@@ -12,15 +12,32 @@
   <script src="/admin/lixeira.js"></script>
   <script src="/admin/imagem.js"></script>
   <script>
-    // O menu do botão Publicar tem "Publicar e criar novo" e "Publicar e duplicar", que não usamos.
+    // O menu do botão Publicar tem "Publicar e criar novo" e "Publicar e duplicar", que não usamos,
+    // e o botão deve publicar direto, sem submenu.
     // O Decap não tem opção para escondê-los (aparecem sempre que criar texto novo é permitido),
     // então removemos os dois itens do menu assim que ele é desenhado.
     (function () {
+      // O botão Publicar abre um menu com um único item, "Publicar agora". Para ele funcionar como um
+      // botão simples, clicamos nesse item sozinhos logo depois do clique em Publicar.
+      var cliqueEmPublicar = 0;
+      var botaoPublicar = /^(publicar|publish)$/i;
+      var publicarAgora = /^(publicar agora|publish now)$/i;
+      document.addEventListener('click', function (e) {
+        var botao = e.target.closest && e.target.closest('button');
+        if (botao && botaoPublicar.test((botao.textContent || '').trim())) cliqueEmPublicar = Date.now();
+      }, true);
       var sobrando = /^(publicar e (criar novo|duplicar)|publish and (create new|duplicate))$/i;
       var porUrl = /^(insert from url|inserir (de|da|por|via) url|inserir url)$/i;
       function limpar() {
         document.querySelectorAll('li, [role="menuitem"]').forEach(function (el) {
           if (sobrando.test((el.textContent || '').trim())) el.style.display = 'none';
+        });
+        document.querySelectorAll('li, [role="menuitem"]').forEach(function (el) {
+          if (cliqueEmPublicar && Date.now() - cliqueEmPublicar < 1500 && publicarAgora.test((el.textContent || '').trim())) {
+            cliqueEmPublicar = 0;
+            if (el.parentElement) el.parentElement.style.visibility = 'hidden';
+            el.click();
+          }
         });
         // A seção "Mídia" do menu do topo (biblioteca solta de imagens) não é usada: as imagens
         // pertencem a cada texto. O Decap não tem opção para escondê-la.
