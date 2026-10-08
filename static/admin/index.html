@@ -12,39 +12,44 @@
   <script src="/admin/lixeira.js"></script>
   <script src="/admin/imagem.js"></script>
   <script>
-    // O menu do botão Publicar tem "Publicar e criar novo" e "Publicar e duplicar", que não usamos,
-    // e o botão deve publicar direto, sem submenu.
-    // O Decap não tem opção para escondê-los (aparecem sempre que criar texto novo é permitido),
-    // então removemos os dois itens do menu assim que ele é desenhado.
+    // Ajustes de interface que o Decap não tem como configurar. Os textos abaixo são os do idioma pt do
+    // próprio Decap (conferidos no código dele); se uma atualização mudar o menu, é aqui que ajustar.
+    //  - Publicar: o botão publica direto (clicamos sozinhos no único item do menu, "Publicar agora")
+    //    e os itens "Publicar e criar novo(a)" e "Publicar e duplicar" somem.
+    //  - A aba "Mídia" do menu do topo (biblioteca solta de imagens) some: as imagens são de cada texto.
+    //  - Qualquer botão "Inserir de uma URL" some: imagens só por envio de arquivo.
     (function () {
-      // O botão Publicar abre um menu com um único item, "Publicar agora". Para ele funcionar como um
-      // botão simples, clicamos nesse item sozinhos logo depois do clique em Publicar.
-      var cliqueEmPublicar = 0;
       var botaoPublicar = /^(publicar|publish)$/i;
       var publicarAgora = /^(publicar agora|publish now)$/i;
+      var sobrando = /^(publicar e criar novo(\(a\))?|publicar e duplicar|publish and (create new|duplicate))$/i;
+      var abaMidia = /^(m[ií]dia|media)$/i;
+      var porUrl = /^(inserir de uma url|insert from url)$/i;
+      var cliqueEmPublicar = 0;
+
+      function texto(el) { return (el.textContent || '').trim(); }
+
+      // O gatilho do Publicar é um <span role="button">, não um <button>.
       document.addEventListener('click', function (e) {
-        var botao = e.target.closest && e.target.closest('button');
-        if (botao && botaoPublicar.test((botao.textContent || '').trim())) cliqueEmPublicar = Date.now();
+        var alvo = e.target.closest && e.target.closest('[role="button"], button');
+        if (alvo && botaoPublicar.test(texto(alvo))) cliqueEmPublicar = Date.now();
       }, true);
-      var sobrando = /^(publicar e (criar novo|duplicar)|publish and (create new|duplicate))$/i;
-      var porUrl = /^(insert from url|inserir (de|da|por|via) url|inserir url)$/i;
+
       function limpar() {
         document.querySelectorAll('li, [role="menuitem"]').forEach(function (el) {
-          if (sobrando.test((el.textContent || '').trim())) el.style.display = 'none';
-        });
-        document.querySelectorAll('li, [role="menuitem"]').forEach(function (el) {
-          if (cliqueEmPublicar && Date.now() - cliqueEmPublicar < 1500 && publicarAgora.test((el.textContent || '').trim())) {
+          var t = texto(el);
+          if (sobrando.test(t)) {
+            el.style.display = 'none';
+          } else if (cliqueEmPublicar && Date.now() - cliqueEmPublicar < 1500 && publicarAgora.test(t)) {
             cliqueEmPublicar = 0;
             if (el.parentElement) el.parentElement.style.visibility = 'hidden';
             el.click();
           }
         });
-        // A seção "Mídia" do menu do topo (biblioteca solta de imagens) não é usada: as imagens
-        // pertencem a cada texto. O Decap não tem opção para escondê-la.
-        document.querySelectorAll('a[href="#/media"]').forEach(function (el) { el.style.display = 'none'; });
-        // Rede de segurança: o botão de imagem por endereço não deve aparecer em lugar nenhum.
+        document.querySelectorAll('nav li button').forEach(function (el) {
+          if (abaMidia.test(texto(el))) (el.closest('li') || el).style.display = 'none';
+        });
         document.querySelectorAll('button').forEach(function (el) {
-          if (porUrl.test((el.textContent || '').trim())) el.style.display = 'none';
+          if (porUrl.test(texto(el))) el.style.display = 'none';
         });
       }
       new MutationObserver(limpar).observe(document.body, { childList: true, subtree: true });
