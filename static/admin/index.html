@@ -11,28 +11,69 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script src="/admin/lixeira.js"></script>
   <script src="/admin/imagem.js"></script>
+  <style>
+    /* "Publicado" (texto já salvo, sem alterações) deixa de ser um menu: sem seta e sem clique. */
+    [data-sem-menu] { pointer-events: none; cursor: default; padding-right: 20px !important; }
+    [data-sem-menu]::after { display: none !important; }
+  </style>
   <script>
     // Ajustes de interface que o Decap não tem como configurar. Os textos abaixo são os do idioma pt do
     // próprio Decap (conferidos no código dele); se uma atualização mudar o menu, é aqui que ajustar.
     //  - Publicar: o botão publica direto (clicamos sozinhos no único item do menu, "Publicar agora")
     //    e os itens "Publicar e criar novo(a)" e "Publicar e duplicar" somem.
+    //  - Texto já publicado: o botão "Publicado" não tem mais o menu com "Duplicar".
     //  - A aba "Mídia" do menu do topo (biblioteca solta de imagens) some: as imagens são de cada texto.
     //  - Qualquer botão "Inserir de uma URL" some: imagens só por envio de arquivo.
+    //  - Editor de texto: o botão de imagem fica na barra, junto dos outros, no lugar do menu "+".
     (function () {
       var botaoPublicar = /^(publicar|publish)$/i;
       var publicarAgora = /^(publicar agora|publish now)$/i;
-      var sobrando = /^(publicar e criar novo(\(a\))?|publicar e duplicar|publish and (create new|duplicate))$/i;
+      var sobrando = /^(publicar e criar novo(\(a\))?|publicar e duplicar|publish and (create new|duplicate)|duplicar|duplicate)$/i;
+      var botaoPublicado = /^(publicado|published)$/i;
       var abaMidia = /^(m[ií]dia|media)$/i;
       var porUrl = /^(inserir de uma url|insert from url)$/i;
+      var botaoMais = /^(adicionar componente|add component)$/i;
+      var itemImagem = /^(imagem|image)$/i;
       var cliqueEmPublicar = 0;
+      var cliqueEmImagem = 0;
+      var menuMais = null;
+
+      var ICONE_IMAGEM = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
 
       function texto(el) { return (el.textContent || '').trim(); }
 
-      // O gatilho do Publicar é um <span role="button">, não um <button>.
+      // Os gatilhos de menu do Decap (Publicar, "Publicado") são <span role="button">, não <button>.
       document.addEventListener('click', function (e) {
         var alvo = e.target.closest && e.target.closest('[role="button"], button');
         if (alvo && botaoPublicar.test(texto(alvo))) cliqueEmPublicar = Date.now();
       }, true);
+
+      // Cria, na barra do editor, um botão de imagem igual aos vizinhos; ao clicar, ele abre o menu "+"
+      // (escondido) e escolhe o item "Imagem".
+      function botaoDeImagemNaBarra() {
+        document.querySelectorAll('button[title]').forEach(function (mais) {
+          if (!botaoMais.test(mais.getAttribute('title') || '')) return;
+          var gatilho = mais.closest('[role="button"]');
+          var envoltorio = gatilho && gatilho.parentElement && gatilho.parentElement.parentElement;
+          var grupo = envoltorio && envoltorio.parentElement;
+          var barra = grupo && grupo.parentElement;
+          if (!barra || barra.querySelector('[data-botao-imagem]')) return;
+          var novo = mais.cloneNode(true);
+          novo.setAttribute('data-botao-imagem', '1');
+          novo.setAttribute('type', 'button');
+          novo.setAttribute('title', 'Imagem');
+          novo.setAttribute('aria-label', 'Imagem');
+          novo.innerHTML = ICONE_IMAGEM;
+          novo.addEventListener('click', function (e) {
+            e.preventDefault();
+            menuMais = envoltorio;
+            cliqueEmImagem = Date.now();
+            mais.click();
+          });
+          barra.insertBefore(novo, grupo);
+          grupo.style.display = 'none';
+        });
+      }
 
       function limpar() {
         document.querySelectorAll('li, [role="menuitem"]').forEach(function (el) {
@@ -43,7 +84,15 @@
             cliqueEmPublicar = 0;
             if (el.parentElement) el.parentElement.style.visibility = 'hidden';
             el.click();
+          } else if (cliqueEmImagem && Date.now() - cliqueEmImagem < 1500 && menuMais && menuMais.contains(el) && itemImagem.test(t)) {
+            cliqueEmImagem = 0;
+            if (el.parentElement) el.parentElement.style.visibility = 'hidden';
+            el.click();
           }
+        });
+        document.querySelectorAll('[role="button"]').forEach(function (el) {
+          if (botaoPublicado.test(texto(el))) el.setAttribute('data-sem-menu', '');
+          else if (el.hasAttribute('data-sem-menu')) el.removeAttribute('data-sem-menu');
         });
         document.querySelectorAll('nav li button').forEach(function (el) {
           if (abaMidia.test(texto(el))) (el.closest('li') || el).style.display = 'none';
@@ -51,6 +100,7 @@
         document.querySelectorAll('button').forEach(function (el) {
           if (porUrl.test(texto(el))) el.style.display = 'none';
         });
+        botaoDeImagemNaBarra();
       }
       new MutationObserver(limpar).observe(document.body, { childList: true, subtree: true });
       limpar();

@@ -78,4 +78,4 @@ collections:
         hint: "Opcional. Aparece no cartão do texto (Início, Publicações e categorias) e no topo do artigo. O site reduz e converte para WebP."
       - { label: Legenda da capa, name: capa_legenda, widget: string, required: false, hint: "Opcional. Aparece sob a imagem no topo do artigo." }
       - { label: Rascunho, name: draft, widget: boolean, default: false, required: false, hint: "Marcado, o texto não vai para o ar." }
-      - { label: Texto, name: body, widget: markdown, modes: [rich_text], hint: "Imagens em JPEG ou PNG, com descrição alternativa." }
+      - { label: Texto, name: body, widget: markdown, modes: [rich_text], editor_components: [image], hint: "Imagens em JPEG ou PNG, com descrição alternativa." }
