@@ -9,5 +9,20 @@
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // O menu do botão Publicar tem "Publicar e criar novo" e "Publicar e duplicar", que não usamos.
+    // O Decap não tem opção para escondê-los (aparecem sempre que criar texto novo é permitido),
+    // então removemos os dois itens do menu assim que ele é desenhado.
+    (function () {
+      var sobrando = /^(publicar e (criar novo|duplicar)|publish and (create new|duplicate))$/i;
+      function limpar() {
+        document.querySelectorAll('li, [role="menuitem"]').forEach(function (el) {
+          if (sobrando.test((el.textContent || '').trim())) el.style.display = 'none';
+        });
+      }
+      new MutationObserver(limpar).observe(document.body, { childList: true, subtree: true });
+      limpar();
+    })();
+  </script>
 </body>
 </html>

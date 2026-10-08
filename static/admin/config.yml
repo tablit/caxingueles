@@ -54,5 +54,13 @@ collections:
           - { label: Resenhas, value: resenhas }
       - { label: Etiquetas, name: tags, widget: list, required: false }
       - { label: Resumo, name: summary, widget: text, hint: "Uma ou duas frases, aparece nos cartões e nas buscas." }
+      - label: Imagem de capa
+        name: capa
+        widget: image
+        required: false
+        choose_url: false # só envio de arquivo do computador, sem colar endereço
+        hint: "Opcional. Aparece no cartão do texto (Início, Publicações e categorias) e no topo do artigo. Até 300 KB."
+      - { label: Descrição da capa, name: capa_alt, widget: string, required: false, hint: "Para leitores de tela. Preencha se enviou uma capa." }
+      - { label: Legenda da capa, name: capa_legenda, widget: string, required: false, hint: "Opcional. Aparece sob a imagem no topo do artigo." }
       - { label: Rascunho, name: draft, widget: boolean, default: false, required: false, hint: "Marcado, o texto não vai para o ar." }
       - { label: Texto, name: body, widget: markdown, modes: [rich_text], hint: "Imagens: até 300 KB cada, com descrição alternativa." }
