@@ -27,7 +27,7 @@ Clique em **Novo Texto** e preencha:
 | Rascunho | Marcado, o texto não vai para o ar |
 | Texto | O corpo, em um editor visual (negrito, itálico, links, títulos, listas, citações, imagens) |
 
-As categorias saem da seção **Categorias** do editor (veja "Categorias", mais abaixo). Hoje há quatro: Ensaios (texto autoral longo), Campo (relato de saída, visita, disciplina prática), Resenhas (leitura comentada) e Caxinguelês (avisos, retrospectivas, o que é do coletivo).
+As categorias saem da seção **Categorias** do editor (veja "Categorias", mais abaixo). Hoje há uma, Caxinguelês; novas categorias são criadas ali.
 
 ### Imagens
 
@@ -98,7 +98,7 @@ tipo: texto
 title: "Floradas do Cerrado"
 date: 2026-10-08
 author: "Seu Nome"
-categorias: ["campo"]
+categorias: ["caxingueles"]
 summary: "Uma ou duas frases."
 capa: capa.jpg
 capa_legenda: "Legenda. Foto: Nome."
