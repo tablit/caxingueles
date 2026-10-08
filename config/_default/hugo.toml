@@ -18,3 +18,19 @@ summaryLength = 0
 [privacy]
   [privacy.youTube]
     privacyEnhanced = true
+
+# Imagens dos textos: o Hugo reduz e converte para WebP no build (ver layouts/_partials/capa-url.html
+# e layouts/_markup/render-image.html). Isso também descarta metadados do arquivo, como localização.
+[imaging]
+  resampleFilter = "Lanczos"
+  [imaging.webp]
+    quality = 80
+  [imaging.jpeg]
+    quality = 85
+
+# Nos textos só vão ao ar as versões reduzidas, não os arquivos originais enviados.
+[[cascade]]
+  [cascade.build]
+    publishResources = false
+  [cascade.target]
+    path = "/publicacoes/**"

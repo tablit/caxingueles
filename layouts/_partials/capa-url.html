@@ -1,0 +1,21 @@
+{{- /* Endereço da capa de um texto.
+       Entrada: dict "pagina" (o texto), "largura" (máx. em px), "opcoes" (ex.: "webp q80"), "absoluto" (bool).
+       A capa fica na pasta do texto (capa: foto.jpg) e é reduzida e convertida pelo Hugo;
+       caminhos antigos (capa: /img/...) continuam funcionando como estão. Devolve "" se não houver capa. */ -}}
+{{- $url := "" -}}
+{{- $pagina := .pagina -}}
+{{- with $pagina.Params.capa -}}
+  {{- $img := $pagina.Resources.Get . -}}
+  {{- if $img -}}
+    {{- if in (slice "jpeg" "png" "webp" "tiff" "bmp") $img.MediaType.SubType -}}
+      {{- $largura := int (math.Min (float $.largura) (float $img.Width)) -}}
+      {{- $proc := $img.Resize (printf "%dx %s" $largura $.opcoes) -}}
+      {{- $url = cond $.absoluto $proc.Permalink $proc.RelPermalink -}}
+    {{- else -}}
+      {{- $url = cond $.absoluto $img.Permalink $img.RelPermalink -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $url = cond $.absoluto (. | absURL) (. | relURL) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $url -}}

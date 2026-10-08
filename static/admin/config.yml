@@ -19,7 +19,8 @@ locale: pt
 site_url: https://caxingueles.eco.br
 display_url: https://caxingueles.eco.br
 
-# Imagens vão para static/img/publicacoes e saem em /img/publicacoes/...
+# Cada texto é uma pasta (content/publicacoes/<texto>/index.md) e suas imagens ficam dentro dela
+# (media_folder vazio, definido na coleção). O Hugo reduz e converte as imagens para WebP no build.
 # O Decap não limita o tamanho: o teto de 300 KB é conferido depois pelo workflow "Imagens até 300 KB".
 media_folder: static/img/publicacoes
 public_folder: /img/publicacoes
@@ -30,10 +31,17 @@ collections:
     label_singular: Texto
     folder: content/publicacoes
     create: true
-    delete: true # além do botão na página do texto, a lista tem uma lixeira (static/admin/lixeira.js)
+    # Sem o botão de apagar do Decap: ele removeria só o index.md e deixaria as imagens.
+    # A lixeira da lista (static/admin/lixeira.js) apaga a pasta inteira.
+    delete: false
     extension: md
     format: frontmatter
     slug: "{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    nested: { depth: 100, summary: "{{title}}" }
+    meta: { path: { widget: string, label: "Pasta do texto", index_file: index } }
     # Só entra na lista quem tem tipo: texto. Assim o _index.md da seção não aparece como se fosse um texto.
     filter: { field: tipo, value: texto }
     summary: "{{title}} — {{author}}"
@@ -59,7 +67,7 @@ collections:
         widget: image
         required: false
         choose_url: false # só envio de arquivo do computador, sem colar endereço
-        hint: "Opcional. Aparece no cartão do texto (Início, Publicações e categorias) e no topo do artigo. Até 300 KB."
+        hint: "Opcional. Aparece no cartão do texto (Início, Publicações e categorias) e no topo do artigo. Até 300 KB; o site reduz e converte para WebP."
       - { label: Descrição da capa, name: capa_alt, widget: string, required: false, hint: "Para leitores de tela. Preencha se enviou uma capa." }
       - { label: Legenda da capa, name: capa_legenda, widget: string, required: false, hint: "Opcional. Aparece sob a imagem no topo do artigo." }
       - { label: Rascunho, name: draft, widget: boolean, default: false, required: false, hint: "Marcado, o texto não vai para o ar." }

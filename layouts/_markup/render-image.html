@@ -1,10 +1,27 @@
+{{- /* Imagem do corpo do texto. Se o arquivo está na pasta do texto (![descrição](foto.jpg)),
+       o Hugo reduz para no máximo 1200 px e converte para WebP; o resto segue como estava. */ -}}
+{{- $src := .Destination -}}
+{{- $largura := 0 -}}
+{{- $altura := 0 -}}
+{{- if and (not (hasPrefix .Destination "/")) (not (hasPrefix .Destination "#")) (not (urls.Parse .Destination).IsAbs) -}}
+  {{- with .PageInner.Resources.Get .Destination -}}
+    {{- if in (slice "jpeg" "png" "webp" "tiff" "bmp") .MediaType.SubType -}}
+      {{- $proc := .Resize (printf "%dx webp q80" (int (math.Min 1200.0 (float .Width)))) -}}
+      {{- $src = $proc.RelPermalink -}}
+      {{- $largura = $proc.Width -}}
+      {{- $altura = $proc.Height -}}
+    {{- else -}}
+      {{- $src = .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 {{- if .IsBlock -}}
 <figure class="figura">
-  <img src="{{ .Destination | safeURL }}" alt="{{ .PlainText }}" loading="lazy">
+  <img src="{{ $src | safeURL }}" alt="{{ .PlainText }}"{{ if $largura }} width="{{ $largura }}" height="{{ $altura }}"{{ end }} loading="lazy">
   {{- with .Title }}
   <figcaption>{{ . | markdownify }}</figcaption>
   {{- end }}
 </figure>
 {{- else -}}
-<img src="{{ .Destination | safeURL }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+<img src="{{ $src | safeURL }}" alt="{{ .PlainText }}"{{ if $largura }} width="{{ $largura }}" height="{{ $altura }}"{{ end }}{{ with .Title }} title="{{ . }}"{{ end }}>
 {{- end -}}

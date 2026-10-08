@@ -30,8 +30,8 @@ Chosen option: **Decap CMS sem PR, só para mantenedores**. O open authoring che
 Como funciona:
 - `/admin` carrega o Decap (`static/admin/`); o login passa por GitHub OAuth, com um proxy em duas funções da Vercel (`api/auth.js`, `api/callback.js`). `GITHUB_CLIENT_ID` e `GITHUB_CLIENT_SECRET` ficam só nas variáveis de ambiente da Vercel.
 - Quem consegue salvar é quem tem acesso de escrita ao repositório; qualquer outra conta entra na tela, mas o commit é recusado.
-- A única coleção é Textos (`content/publicacoes`), filtrada por `tipo: texto`. Sem coleções para Início, Sobre, Contato ou Categorias. Apagar um texto é possível pela página do texto ou pela lixeira em cada item da lista (`static/admin/lixeira.js`, que apaga o arquivo pela API do GitHub com o token do login).
-- Imagens vão para `static/img/publicacoes/`. O limite de 300 KB é conferido pelo workflow `Imagens até 300 KB`.
+- A única coleção é Textos (`content/publicacoes`), filtrada por `tipo: texto`. Sem coleções para Início, Sobre, Contato ou Categorias. Cada texto é uma pasta (`content/publicacoes/<texto>/index.md`, um "page bundle" do Hugo) e suas imagens ficam dentro dela. Apagar um texto é pela lixeira em cada item da lista (`static/admin/lixeira.js`), que apaga a pasta inteira, imagens incluídas, em um commit, pela API do GitHub com o token do login. O botão de apagar do Decap fica desligado, porque removeria só o `index.md`.
+- As imagens (capa e corpo) ficam na pasta do texto, então não se misturam entre textos. O Hugo reduz (até 1200 px no corpo, 1600 px na capa) e converte para WebP no build, e só as versões reduzidas vão ao ar. Textos antigos, de um arquivo só, com capa em `/img/...`, continuam funcionando. O limite de 300 KB e a recusa de HEIC são conferidos pelo workflow `Imagens até 300 KB`.
 - A regra de repositório "Proteger main" mantém: exigência de PR, bloqueio de apagar e de force push. Os papéis de admin e de escrita contornam a exigência de PR (`bypass_mode: always`) para o editor poder commitar.
 - Mantenedores: `tablit` (admin) e `EdsonSarti` (colaborador com escrita, convidado em 2026-10-08). Contas pessoais do GitHub só oferecem o nível de escrita para colaboradores, sem "Maintain"; a pessoa não altera configurações do repositório nem a regra da `main`.
 
@@ -44,7 +44,7 @@ Como funciona:
 ### Negative Consequences
 
 - Sem revisão: um erro vai ao ar na hora.
-- O workflow de imagens avisa depois do commit; não impede a imagem grande de entrar.
+- O workflow de imagens avisa depois do commit; não impede a imagem grande de entrar. O Git guarda o original enviado, mesmo que o site publique só a versão reduzida.
 - Rascunhos (`draft: true`) ficam legíveis no GitHub, porque o repositório é público.
 - Cada salvamento gera um deploy; há um teto diário no plano Hobby (conferir o número atual).
 - O editor ainda permite editar textos já publicados; o Decap não permite proibir isso.

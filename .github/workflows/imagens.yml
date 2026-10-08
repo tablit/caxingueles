@@ -32,5 +32,10 @@ jobs:
               echo "::error file=$arquivo::$arquivo tem $((tamanho / 1024)) KB; o limite é 300 KB."
               erro=1
             fi
-          done < <(git diff --name-only --diff-filter=AM "$BASE" "$HEAD" -- 'static/img' 'assets/img' | grep -iE '\.(png|jpe?g|webp|gif)$')
+          done < <(git diff --name-only --diff-filter=AM "$BASE" "$HEAD" -- 'static/img' 'assets/img' 'content' | grep -iE '\.(png|jpe?g|webp|gif)$')
+          # O Hugo não lê HEIC/HEIF (fotos de iPhone): o texto ficaria sem imagem.
+          while IFS= read -r arquivo; do
+            echo "::error file=$arquivo::$arquivo é HEIC/HEIF, que o site não processa. Exporte como JPEG ou PNG."
+            erro=1
+          done < <(git diff --name-only --diff-filter=AM "$BASE" "$HEAD" -- 'static/img' 'assets/img' 'content' | grep -iE '\.(heic|heif)$')
           exit $erro

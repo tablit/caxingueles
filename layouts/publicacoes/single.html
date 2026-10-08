@@ -10,9 +10,9 @@
       <p class="post-meta">{{ with .Params.author }}por {{ . }} · {{ end }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time> · {{ .ReadingTime }} min de leitura</p>
     </header>
 
-    {{- with .Params.capa }}
+    {{- with partial "capa-url.html" (dict "pagina" . "largura" 1600 "opcoes" "webp q80" "absoluto" false) }}
     <figure class="post-capa">
-      <img src="{{ . | relURL }}" alt="{{ $.Params.capa_alt }}">
+      <img src="{{ . }}" alt="{{ $.Params.capa_alt }}">
       {{- with $.Params.capa_legenda }}
       <figcaption>{{ . }}</figcaption>
       {{- end }}

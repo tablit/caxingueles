@@ -1,7 +1,7 @@
 {{- $categoria := partial "categoria-do-post.html" . -}}
 <article class="card-post"{{ with $categoria }}{{ with .Params.ipe }} data-ipe="{{ . }}"{{ end }}{{ end }}>
-  {{- with .Params.capa }}
-  <img class="card-post__img" src="{{ . | relURL }}" alt="{{ $.Params.capa_alt }}" loading="lazy">
+  {{- with partial "capa-url.html" (dict "pagina" . "largura" 800 "opcoes" "webp q80" "absoluto" false) }}
+  <img class="card-post__img" src="{{ . }}" alt="{{ $.Params.capa_alt }}" loading="lazy">
   {{- end }}
   <div class="card-post__corpo">
     {{- with $categoria }}
