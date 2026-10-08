@@ -9,6 +9,7 @@ tags:
   - exemplo
 summary: Um texto de exemplo para conferir o layout — apague quando os textos de
   verdade chegarem.
+capa: /img/publicacoes/lidar.png
 draft: true
 ---
 
