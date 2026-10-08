@@ -101,4 +101,4 @@ Uma imagem sozinha num parágrafo vira figura. Para ter legenda, escreva o texto
 ![Gráfico de barras com as floradas por mês](/img/publicacoes/grafico.png "Figura 1. Floradas ao longo do ano.")
 ```
 
-Comprima a imagem antes de subir — acima de 300 KB, a página fica lenta no celular.
+Não é preciso comprimir a imagem antes de subir: o site reduz e converte para WebP ao publicar. Use JPEG ou PNG (HEIC, o formato de fotos de iPhone, não funciona).
