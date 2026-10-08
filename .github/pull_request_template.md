@@ -1,11 +1,9 @@
-## Antes de pedir revisão
+## O que muda
 
-- [ ] Front-matter preenchido: `title`, `date`, `author`, `summary`, `categorias`
-- [ ] Categoria escolhida da lista (`ensaios`, `campo`, `resenhas`, `caxingueles`)
-- [ ] Nome do arquivo em minúsculas, sem acento, com hífens
-- [ ] Preview da Vercel aberto e conferido, inclusive no celular
-- [ ] Imagens com descrição alternativa e abaixo de 300 KB
+<!-- Uma ou duas linhas. Os textos do site são publicados pelo editor em /admin, sem PR; este template é para mudanças de código, layout e configuração. -->
 
-## Sobre este texto
+## Antes de mesclar
 
-<!-- Uma linha sobre o que é, e o que você quer que a revisão olhe. -->
+- [ ] `hugo --gc --minify` roda sem erros
+- [ ] Conferido no `hugo server -D` (inclusive no celular, se mexe no visual)
+- [ ] Sem segredos nem chaves nos arquivos
