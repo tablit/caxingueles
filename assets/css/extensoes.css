@@ -39,3 +39,8 @@
   width: auto;
   pointer-events: none;
 }
+
+/* Áudio do texto: tocador do navegador na largura do conteúdo, com legenda como a da capa. */
+.post-audio { margin: 0 0 var(--esp-8); }
+.post-audio audio { display: block; width: 100%; }
+.post-audio figcaption { margin-top: var(--esp-2); font-size: var(--fs-14); color: var(--cor-pelo); text-align: center; }

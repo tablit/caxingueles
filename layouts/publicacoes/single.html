@@ -19,6 +19,22 @@
     </figure>
     {{- end }}
 
+    {{- /* Áudio na pasta do texto (audio: leitura.mp3). preload="none": só baixa quando a pessoa aperta o play. */}}
+    {{- with .Params.audio }}
+      {{- with $.Resources.Get . }}
+    <figure class="post-audio">
+      <audio controls preload="none" src="{{ .RelPermalink }}">
+        <a href="{{ .RelPermalink }}" download>Baixar o áudio</a>
+      </audio>
+      {{- with $.Params.audio_legenda }}
+      <figcaption>{{ . }}</figcaption>
+      {{- end }}
+    </figure>
+      {{- else }}
+        {{- warnf "%s: o áudio %q não está na pasta do texto" $.File.Path . }}
+      {{- end }}
+    {{- end }}
+
     <div class="post-layout">
       {{- if and .Params.showTableOfContents .Fragments.HeadingsMap }}
       <details class="post-sumario" open>
