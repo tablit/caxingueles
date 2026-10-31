@@ -5,15 +5,29 @@ date: 2026-10-31
 author: Amanda dos Reis Fraga e Ana Paula do Nascimento
 categorias:
   - caxingueles
-summary: |
-  Resumo
+tags:
+  - política
+  - povostradicionais
+  - povosindígena
+  - direitos
+  - conservação
+  - justiçasocial
+  - democracia
+  - eleiçoes
+  - marcotemporal
+  - territórios
+  - sustentabilidade
+summary: O voto também define os rumos da proteção ambiental e dos direitos
+  territoriais. A partir da realidade dos povos tradicionais, o texto reflete
+  sobre a relação entre política, conservação da natureza, justiça social e
+  permanência nos territórios.
 capa: img-20261031-wa0000.jpg
 capa_legenda: "XX Marcha de Resistência e Autonomia do Povo Tremembé | Fonte:
   Acervo Comunidade Tremembé de Queimadas"
 audio: aud-20261030-wa0090.mp3
 audio_legenda: Reflexão da Ana Paula, liderança Tremembé de Queimadas sobre
   resistência e política no território
-draft: true
+draft: false
 ---
 Faltam poucos dias para o segundo turno das eleições presidenciais, marcado para 25 de outubro, e o país chega a esse momento dividido e, muitas vezes, exposto a desinformação e pré-conceitos. Entre acirradas disputas nas redes, correntes de mensagens e discursos inflamados, cresce o risco de esquecer algo essencial: o voto não se encerra na urna. Ele decide o destino de milhões de pessoas e define quais políticas chegarão, ou não, às periferias, ao campo e às florestas e matas.
 
@@ -26,3 +40,11 @@ Afinal, as matas e florestas não são apenas paisagem. Ela trabalha, silenciosa
 É por isso que o voto consciente é, ou deveria ser, o resultado de um processo de reflexão. E uma das perguntas que cada eleitor pode levar à urna é simples... a sua escolha protege ou ameaça os direitos, os biomas e as pessoas mais vulneráveis?
 
 Que cada um de nós assuma a sua parte, enfrentando a desinformação e apoiando a construção de um país mais justo e sustentável. Afinal, o silêncio também é político.
+
+
+
+Quer conhecer um pouco mais da luta e apoiar a comunidade Tremembé de Queimadas? Acesse: <https://www.instagram.com/povo_tremembedequeimadas/>
+
+
+
+![Festa da homologação na TI Tremembé de Queimadas](img-20261031-wa0001.jpg "Fonte: Acervo Comunidade Tremembé de Queimadas")
