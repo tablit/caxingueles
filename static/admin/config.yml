@@ -77,6 +77,15 @@ collections:
         choose_url: false # só envio de arquivo do computador, sem colar endereço
         hint: "Opcional. Aparece no cartão do texto (Início, Publicações e categorias) e no topo do artigo. O site reduz e converte para WebP."
       - { label: Legenda da capa, name: capa_legenda, widget: string, required: false, hint: "Opcional. Aparece sob a imagem no topo do artigo." }
+      # Áudio: fica na pasta do texto, como as imagens, e vai para o Git como foi enviado (não há conversão
+      # no build). Por isso o pedido de MP3 ou M4A comprimido: voz a 64 kbps dá cerca de 0,5 MB por minuto.
+      - label: Áudio
+        name: audio
+        widget: file
+        required: false
+        choose_url: false
+        hint: "Opcional. MP3 ou M4A (voz a 64–96 kbps: cerca de 0,5 MB por minuto). Não envie WAV, que fica até 20 vezes maior. Aparece como tocador no topo do artigo."
+      - { label: Legenda do áudio, name: audio_legenda, widget: string, required: false, hint: "Opcional. Ex.: Leitura do texto pela autora." }
       - { label: Rascunho, name: draft, widget: boolean, default: false, required: false, hint: "Marcado, o texto não vai para o ar." }
       - { label: Texto, name: body, widget: markdown, modes: [rich_text], editor_components: [image], hint: "Imagens em JPEG ou PNG, com descrição alternativa." }
 

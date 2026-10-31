@@ -24,6 +24,8 @@ Clique em **Novo Texto** e preencha:
 | Resumo | Uma ou duas frases. É o que aparece nos cartões e nas buscas |
 | Imagem de capa | Opcional. Botão que abre a escolha de um arquivo do computador |
 | Legenda da capa | Opcional. Aparece sob a imagem no topo do artigo |
+| Áudio | Opcional. Um arquivo MP3 ou M4A, que vira um tocador no topo do artigo |
+| Legenda do áudio | Opcional. Aparece sob o tocador (ex.: "Leitura do texto pela autora") |
 | Rascunho | Marcado, o texto não vai para o ar |
 | Texto | O corpo, em um editor visual (negrito, itálico, links, títulos, listas, citações, imagens) |
 
@@ -35,6 +37,12 @@ As categorias saem da seção **Categorias** do editor (veja "Categorias", mais 
 - **No corpo do texto:** use o botão de imagem do editor (ou o **+**), escolha o arquivo e preencha a descrição, que serve a quem não enxerga a imagem. O título é opcional e aparece como legenda da figura.
 - As imagens ficam na pasta do próprio texto. Não é preciso comprimir: o site reduz e converte para WebP ao publicar, e não há limite de tamanho.
 - Use JPEG ou PNG. HEIC, o formato de fotos de iPhone, não funciona: o site ficaria sem a imagem. Exporte como JPEG antes.
+
+### Áudio
+
+- Use o botão **Áudio** e escolha o arquivo no computador. Ele fica na pasta do texto e aparece como um tocador no topo do artigo; o texto escrito continua sendo a versão para quem não pode ouvir.
+- Envie **MP3 ou M4A comprimido**. Ao contrário das imagens, o site não reduz o áudio: o arquivo vai para o ar como foi enviado. Voz a 64–96 kbps dá cerca de 0,5 MB por minuto, ou 5 MB para uma leitura de 10 minutos.
+- Não envie WAV (gravações de celular e de gravador costumam vir assim): fica até 20 vezes maior. Converta antes, por exemplo no Audacity (Arquivo → Exportar → MP3).
 
 ### O endereço do texto
 
@@ -88,6 +96,7 @@ content/publicacoes/floradas_do_cerrado/
   index.md      o texto, com um bloco de dados no começo
   capa.jpg      a capa
   grafico.png   imagens do corpo
+  leitura.mp3   o áudio (opcional)
 ```
 
 O bloco de dados no começo do `index.md`:
@@ -102,6 +111,8 @@ categorias: ["caxingueles"]
 summary: "Uma ou duas frases."
 capa: capa.jpg
 capa_legenda: "Legenda. Foto: Nome."
+audio: leitura.mp3
+audio_legenda: "Leitura do texto pela autora."
 draft: false
 ---
 ```

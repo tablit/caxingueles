@@ -1,7 +1,7 @@
-name: Formato das imagens
+name: Formato das imagens e áudios
 
 # Falha se uma imagem HEIC/HEIF for adicionada (o Hugo não lê esses formatos). Não há limite de tamanho:
-# o Hugo reduz as imagens ao publicar. Em push na main (textos do editor) o aviso vem depois do commit.
+# o Hugo reduz as imagens ao publicar. Áudio não é reduzido no build: falha com WAV/AIFF/FLAC e acima de 20 MB. Em push na main (textos do editor) o aviso vem depois do commit.
 on:
   pull_request:
   push:
@@ -29,4 +29,22 @@ jobs:
             echo "::error file=$arquivo::$arquivo é HEIC/HEIF, que o site não processa. Exporte como JPEG ou PNG."
             erro=1
           done < <(git diff --name-only --diff-filter=AM "$BASE" "$HEAD" -- 'static/img' 'assets/img' 'content' | grep -iE '\.(heic|heif)$')
+          exit $erro
+      - name: Conferir áudios
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          erro=0
+          limite=$((20 * 1024 * 1024))
+          # O áudio vai ao ar como foi enviado; sem compressão, um minuto de WAV passa de 10 MB.
+          while IFS= read -r arquivo; do
+            if echo "$arquivo" | grep -qiE '\.(wav|aif|aiff|flac)$'; then
+              echo "::error file=$arquivo::$arquivo não é comprimido. Converta para MP3 ou M4A (voz a 64–96 kbps)."
+              erro=1
+            elif [ "$(git cat-file -s "$HEAD:$arquivo")" -gt "$limite" ]; then
+              echo "::error file=$arquivo::$arquivo passa de 20 MB. Exporte de novo com taxa menor (voz a 64 kbps dá cerca de 0,5 MB por minuto)."
+              erro=1
+            fi
+          done < <(git diff --name-only --diff-filter=AM "$BASE" "$HEAD" -- 'static' 'assets' 'content' | grep -iE '\.(wav|aif|aiff|flac|mp3|m4a|ogg|opus)$')
           exit $erro
